@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>核能产业链深度分析 — 10年现金流模型与DCF估值 | #0002</title>
+<link rel="stylesheet" href="../style.css">
+<meta name="description" content="核能投资完整逻辑：铀供需分析、A股标的筛选、10年现金流预测模型、DCF估值与关键跟踪事项">
+<style>
+/* 报告页特有样式 */
+.report-header {
+  background: linear-gradient(135deg, rgba(26,115,232,0.08) 0%, rgba(26,115,232,0.02) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="dark"] .report-header {
+  background: linear-gradient(135deg, rgba(88,166,255,0.1) 0%, rgba(88,166,255,0.02) 100%);
+}
+.report-header::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(26,115,232,0.06);
+}
+.report-seq {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--accent);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.report-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.report-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 目录导航 */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  margin-bottom: 32px;
+}
+.toc h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+}
+.toc ol {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+  counter-reset: toc-counter;
+}
+.toc ol li {
+  counter-increment: toc-counter;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.toc ol li::before {
+  content: counter(toc-counter) ". ";
+  color: var(--accent);
+  font-weight: 700;
+}
+.toc ol li a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.toc ol li a:hover {
+  color: var(--accent);
+}
+
+/* 内容章节 */
+.chapter {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+ scroll-margin-top: 72px;
+}
+.chapter-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border-color);
+}
+.chapter-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* 高亮结论框 */
+.callout {
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin: 20px 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+.callout-info {
+  background: rgba(26,115,232,0.08);
+  border-left: 4px solid var(--accent);
+}
+.callout-warn {
+  background: rgba(251,140,0,0.08);
+  border-left: 4px solid var(--signal-warning);
+}
+.callout-success {
+  background: rgba(67,160,71,0.08);
+  border-left: 4px solid var(--signal-safe);
+}
+.callout-danger {
+  background: rgba(229,57,53,0.08);
+  border-left: 4px solid var(--signal-danger);
+}
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+/* 数据表格增强 */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 0.87rem;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.data-table thead th {
+  background: var(--bg-primary);
+  padding: 11px 14px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.data-table tbody td {
+  padding: 9px 14px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.data-table tbody tr:nth-child(even) {
+  background: rgba(0,0,0,0.02);
+}
+[data-theme="dark"] .data-table tbody tr:nth-child(even) {
+  background: rgba(255,255,255,0.02);
+}
+.data-table .row-label {
+  text-align: left !important;
+  font-weight: 600;
+  color: var(--text-primary) !important;
+  background: var(--bg-primary) !important;
+}
+.data-table .positive { color: var(--up-color); font-weight: 600; }
+.data-table .negative { color: var(--down-color); font-weight: 600; }
+.data-table .highlight { background: rgba(26,115,232,0.06) !important; font-weight: 700; }
+
+/* 推荐评分卡 */
+.rating-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.stock-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  background: var(--bg-primary);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stock-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.stock-card.top-pick {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+.stock-card .stock-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.stock-card .stock-code {
+  font-family: "SF Mono", Consolas, monospace;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.stock-card .rating-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.stock-card .rating-s { background: rgba(67,160,71,0.15); color: var(--signal-safe); }
+.stock-card .rating-a { background: rgba(26,115,232,0.15); color: var(--accent); }
+.stock-card .rating-b { background: rgba(251,140,0,0.15); color: var(--signal-warning); }
+.stock-card .stock-role {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.stock-card .stock-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+.stock-card .stock-metrics span {
+  color: var(--text-muted);
+}
+.stock-card .stock-metrics b {
+  color: var(--text-primary);
+}
+
+/* 模型公式区 */
+.formula-box {
+  background: var(--bg-primary);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-family: "SF Mono", Consolas, "Courier New", monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  color: var(--text-secondary);
+}
+.formula-box .var { color: var(--accent); font-weight: 600; }
+.formula-box .note { color: var(--text-muted); font-size: 0.78rem; margin-top: 8px; }
+
+/* 时间线 */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+  margin: 20px 0;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -23px;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg-secondary);
+}
+.timeline-item .year {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+.timeline-item .desc {
+  font-size: 0.87rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* 跟踪清单 */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+.checklist li {
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border-color);
+  font-size: 0.89rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.5;
+}
+.checklist li.prio-high { border-left-color: var(--signal-danger); }
+.checklist li.prio-mid { border-left-color: var(--signal-warning); }
+.checklist li.prio-low { border-left-color: var(--signal-safe); }
+.checklist li .prio-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.checklist li .prio-tag.high { background: rgba(229,57,53,0.12); color: var(--signal-danger); }
+.checklist li .prio-tag.mid { background: rgba(251,140,0,0.12); color: var(--signal-warning); }
+.checklist li .prio-tag.low { background: rgba(67,160,71,0.12); color: var(--signal-safe); }
+
+/* 对比表 */
+.compare-table { width: 100%; border-collapse: collapse; margin: 18px 0; }
+.compare-table th {
+  background: var(--bg-primary);
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+.compare-table td {
+  padding: 11px 14px;
+  border: 1px solid var(--border-color);
+  font-size: 0.87rem;
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+.compare-table tr td:first-child {
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  width: 140px;
+}
+
+/* 图表区域 */
+.chart-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.chart-section canvas {
+  width: 100% !important;
+  max-height: 360px;
+  min-height: 280px;
+}
+.chart-section h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .report-header { padding: 20px; }
+  .report-title { font-size: 1.3rem; }
+  .chapter { padding: 20px 18px; }
+  .rating-grid { grid-template-columns: 1fr; }
+  .toc { padding: 18px 20px; }
+  .data-table { font-size: 0.78rem; }
+  .compare-table { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <img src="../avatar.jpg" alt="月泽小猫猫" class="brand-avatar" />
+      <span>月泽小猫猫的逻辑库</span>
+    </a>
+    <div class="nav-right">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="搜索..." />
+      </div>
+      <button class="theme-toggle" title="切换主题">🌙</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- 面包屑 -->
+  <div class="breadcrumb">
+    <a href="../index.html">首页</a>
+    <span class="separator">›</span>
+    <a href="../index.html#reports">研究报告</a>
+    <span class="separator">›</span>
+    <span>#0002 核能产业链深度分析</span>
+  </div>
+
+  <!-- 报告头 -->
+  <div class="report-header">
+    <div class="report-seq">📋 研究报告 #0002</div>
+    <h1 class="report-title">核能产业链深度分析 — 10年现金流预测与DCF估值</h1>
+    <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.65">
+      从上游铀资源供需格局出发，筛选A股主板纯核能标的，构建2025-2035年现金流数学模型，用DCF方法预测内在价值，给出可执行的投资决策框架。
+    </p>
+    <div class="report-meta">
+      <span>📅 2026-05-17</span>
+      <span>⏱️ 阅读约 15 分钟</span>
+      <span>🏷️ 投资标的 / 核能 / DCF / 现金流模型</span>
+      <span>📊 数据来源：公司年报、高盛、财新、同花顺</span>
+    </div>
+  </div>
+
+  <!-- 目录 -->
+  <div class="toc">
+    <h3>📑 目录</h3>
+    <ol>
+      <li><a href="#ch1">投资逻辑总览：为什么是现在？</a></li>
+      <li><a href="#ch2">上游核心变量：铀的供需与价格</a></li>
+      <li><a href="#ch3">标的筛选：A股主板纯核能公司</a></li>
+      <li><a href="#ch4">现金流数学模型（10年预测）</a></li>
+      <li><a href="#ch5">DCF估值与股价预测</a></li>
+      <li><a href="#ch6">关键跟踪事项清单</a></li>
+    </ol>
+  </div>
+
+  <!-- ========== 第一章：投资逻辑总览 ========== -->
+  <div class="chapter" id="ch1">
+    <h2 class="chapter-title"><span class="chapter-num">1</span>投资逻辑总览：为什么是现在？</h2>
+
+    <div class="callout callout-success">
+      <div class="callout-title">✅ 核心判断</div>
+      核电是中国能源结构转型中确定性最高的赛道之一——政策护航、装机加速、运营端呈现"印钞机"特征。当前处于CapEx投入期，FCF尚未完全释放，但2029年后自由现金流将加速转正，是布局窗口。
+    </div>
+
+    <h3 style="margin:22px 0 12px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">逻辑链条</h3>
+    <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:12px">
+      国家<strong>"双碳"目标</strong> → 核电作为唯一稳定基荷清洁能源 → 审批核准加速（年核准8-10台）→ 
+      装机量从58GW(2025)→130GW+(2030规划) → 运营端享受<strong>高利用率+固定电价+长折旧周期</strong> → 
+      经营现金流远超净利润（~4倍关系）→ CapEx高峰后FCF释放 → 股价重估
+    </p>
+
+    <h3 style="margin:22px 0 12px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">关键数字速览</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>指标</th><th>数值</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">2030年核电装机目标</td><td class="highlight">130+ GW</td><td>较2025年翻倍+</td></tr>
+        <tr><td class="row-label">年核准节奏</td><td class="highlight">8-10 台机组</td><td>2019年前仅2-3台/年</td></tr>
+        <tr><td class="row-label">核电平均利用小时</td><td class="highlight">7,800+ h/年</td><td>远高于光伏(~1,200h)、风电(~2,200h)</td></tr>
+        <tr><td class="row-label">OCF/净利润比值</td><td class="highlight">~4x</td><td>折旧是现金成本而非真实支出</td></tr>
+        <tr><td class="row-label">度电成本中铀占比</td><td>~9%</td><td>铀价波动对利润影响有限</td></tr>
+        <tr><td class="row-label">FCF转折点</td><td class="highlight">2029 年</td><td>CapEx见顶回落，FCF转正加速</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">⚠️ 主要风险</div>
+      <strong>电价下行风险 > 装机不及预期 > 铀价冲击 > 安全事故（尾部风险）</strong>
+      <br>电力市场化改革可能导致核电上网电价承压，这是影响估值的最关键变量。铀价因长协锁价机制，实际影响被大幅平滑。
+    </div>
+  </div>
+
+  <!-- ========== 第二章：铀供需与价格 ========== -->
+  <div class="chapter" id="ch2">
+    <h2 class="chapter-title"><span class="chapter-num">2</span>上游核心变量：铀的供需与价格</h2>
+
+    <h3 style="margin:0 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">2.1 价格走势：已从历史底部暴涨180%+</h3>
+
+    <div class="chart-section">
+      <h4>📈 铀价历史走势（2007-2026）</h4>
+      <canvas id="chartUraniumPrice"></canvas>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>时间节点</th><th>现货价($/lb)</th><th>长协价($/lb)</th><th>事件背景</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">2007 高点</td><td>$136</td><td>—</td><td>Fukushima前泡沫高点</td></tr>
+        <tr><td class="row-label">2016 低谷</td><td>$18</td><td>—</td><td>Fukushima后库存去化，矿企破产潮</td></tr>
+        <tr><td class="row-label">2020 疫情底</td><td>$30.6</td><td>—</td><td>COVID需求萎缩+产能退出</td></tr>
+        <tr><td class="row-label">2024-01</td><td>$91</td><td>—</td><td>AI算力+数据中心驱动预期反转</td></tr>
+        <tr><td class="row-label">2025 至今</td><td class="positive">$86</td><td class="positive">$94+</td><td>高位震荡，供给约束持续</td></tr>
+        <tr><td class="row-label">vs 2020涨幅</td><td class="positive highlight">+180%</td><td class="positive highlight">+200%+</td><td>—</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">2.2 供需缺口：高盛预测未来缺口达32%</h3>
+
+    <div class="chart-section">
+      <h4>📊 全球铀供需对比（万吨天然铀当量）</h4>
+      <canvas id="chartUraniumSupplyDemand"></canvas>
+    </div>
+
+    <p style="color:var(--text-secondary);line-height:1.7;margin:14px 0">
+      <strong>需求侧爆发：</strong>全球在运反应堆从Fukushima后的"退役潮"转向"延寿+新扩建"周期。
+      中国核电在建+规划装机全球第一，印度、东欧、中东新项目密集启动。
+      AI数据中心能耗激增进一步强化了基荷电力需求。
+    </p>
+    <p style="color:var(--text-secondary);line-height:1.7;margin:14px 0">
+      <strong>供给侧收缩：</strong>主要矿山产能受限：
+    </p>
+    <ul style="margin:10px 0 14px 22px;color:var(--text-secondary)">
+      <li><b>哈萨克斯坦国家原子能公司(Kazatomprom)</b> — 全球最大供应商（市占率43%），<b>主动减产</b>（详见2.3节）</li>
+      <li><b>Cameco(加拿大)</b> — McArthur River矿产量下调-17%，品位下降</li>
+      <li><b>尼日尔政变</b> — Somair/Imouraren供应中断</li>
+      <li><b>俄罗斯制裁</b> — EUA/HEU供应路径受阻</li>
+    </ul>
+
+    <div class="callout callout-info">
+      <div class="callout-title">💡 关键认知</div>
+      铀市场是一个<b>长周期、低弹性</b>的市场：从发现矿床到投产需要8-15年，
+      当前供给短缺无法通过短期扩产解决。这意味着高价可能持续数年。
+    </div>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">2.3 哈萨克斯坦为何减产？三大原因</h3>
+
+    <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:14px">
+      Kazatomprom占全球天然铀供应量约43%，其减产决策直接影响全球平衡。
+    </p>
+
+    <table class="compare-table">
+      <tr>
+        <th>原因</th>
+        <th>重要性</th>
+        <th>详情</th>
+      </tr>
+      <tr>
+        <td>① 硫酸短缺（最关键）</td>
+        <td><span style="color:var(--signal-danger);font-weight:700">★★★</span></td>
+        <td>哈萨克斯坦采用ISL地浸法开采，每磅铀需消耗大量硫酸。当地硫酸供应链瓶颈导致无法维持原有产量计划。</td>
+      </tr>
+      <tr>
+        <td>② 主动控量保价</td>
+        <td><span style="color:var(--signal-warning);font-weight:700">★★☆</span></td>
+        <td>以43%市占率的垄断地位，减产推升铀价符合长期利益。类似OPEC的产量管理策略。</td>
+      </tr>
+      <tr>
+        <td>③ 矿山老化品位下降</td>
+        <td><span style="color:var(--text-muted);font-weight:700">★☆☆</span></td>
+        <td>主力矿山开采多年后品位自然递减，维持产量需更多处理量。</td>
+      </tr>
+    </table>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">2.4 中国铀自给率：从19%到70%的目标</h3>
+
+    <div class="chart-section">
+      <h4>🇨🇳 中国铀自给率变化趋势</h4>
+      <canvas id="chartChinaSelfSufficiency"></canvas>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>年份</th><th>自给率</th><th>进口依赖</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">2020</td><td>19%</td><td>81%</td><td>几乎完全依赖哈萨克斯坦等国</td></tr>
+        <tr><td class="row-label">2024</td><td class="highlight">42.3%</td><td>57.7%</td><td>国内地浸矿山快速放量（新疆伊犁、内蒙通辽等）</td></tr>
+        <tr><td class="row-label">2030 目标</td><td style="color:var(--accent);font-weight:700">70%</td><td>30%</td><td>"十四五"规划明确目标</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">2.5 铀价上涨对核电利润的影响：实际很有限</h3>
+
+    <div class="chart-section">
+      <h4>📉 铀价敏感性分析：对度电成本和净利的影响</h4>
+      <canvas id="chartUraniumSensitivity"></canvas>
+    </div>
+
+    <div class="formula-box">
+      <b>度电燃料成本构成：</b><br>
+      天然铀采购 ≈ 占度电成本 <span class="var">~9%</span>（约0.05-0.06元/kWh中的燃料部分）
+      <div class="note">
+        华龙一号度电成本参考：总投资~160亿/GW，LCOE≈0.36元/kWh<br>
+        其中燃料循环成本（铀浓缩+组件制造+乏燃料处理）约占25%-30%的LCOE，天然铀本身仅占燃料成本的约1/3
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>情景</th><th>铀价($/lb)</th><th>vs当前</th><th>度电成本增加</th><th>理论净利影响</th><th>实际影响*</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">基准(2025E)</td><td>$86</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td class="row-label">温和上涨</td><td>$106 (+$20)</td><td class="positive">+23%</td><td>+0.008元</td><td class="negative">~-7%</td><td class="negative">~-2~3%</td></tr>
+        <tr><td class="row-label">大幅上涨</td><td>$129 (+50%)</td><td class="positive">+50%</td><td>+0.017元</td><td class="negative">~-13%</td><td class="negative">~-4~6%</td></tr>
+        <tr><td class="row-label">极端情况</td><td>$172 (翻倍)</td><td class="positive">+100%</td><td>+0.034元</td><td class="negative">~-26%</td><td class="negative">~-8~10%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px">
+      *实际影响远低于理论值，因为：①核电企业普遍签订5-10年长协锁定铀价；②燃料成本仅为度电成本一部分；
+      ③存在燃料库存缓冲；④电价联动机制（有限）
+    </p>
+  </div>
+
+  <!-- ========== 第三章：标的筛选 ========== -->
+  <div class="chapter" id="ch3">
+    <h2 class="chapter-title"><span class="chapter-num">3</span>标的筛选：A股主板纯核能公司</h2>
+
+    <h3 style="margin:0 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">筛选标准</h3>
+    <ul style="margin:10px 0 18px 22px;color:var(--text-secondary);line-height:1.7">
+      <li>✅ A股主板上市（含深主板，排除科创板/创业板）</li>
+      <li>✅ 主营业务收入中核能相关占比 ≥ 35%</li>
+      <li>✅ 有明确的核能业务增长驱动力</li>
+      <li>❌ 排除：东方电气(核能占比&lt;20%)、上海电气(&lt;10%)等泛概念股</li>
+    </ul>
+
+    <h3 style="margin:0 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">最终筛选结果（按推荐度排序）</h3>
+
+    <div class="rating-grid">
+      <!-- 中国核电 -->
+      <div class="stock-card top-pick">
+        <div class="stock-name">中国核电 ⭐</div>
+        <div class="stock-code">601985 · 沪市主板</div>
+        <span class="rating-badge rating-s">S 级 · 核心持仓</span>
+        <div class="stock-role">核电运营龙头，控股装机全国第一</div>
+        <div class="stock-metrics">
+          <span>核能占比</span><b>~80%</b>
+          <span>PE(TTM)</span><b>~20x</b>
+          <span>2025净利</span><b>~93亿</b>
+          <span>ROE</span><b>~8.9%</b>
+        </div>
+      </div>
+      <!-- 中国广核 -->
+      <div class="stock-card">
+        <div class="stock-name">中国广核</div>
+        <div class="stock-code">003816 · 深市中小板*</div>
+        <span class="rating-badge rating-a">A 级 · 价值配置</span>
+        <div class="stock-role">第二大运营商，华龙一号主力建设方</div>
+        <div class="stock-metrics">
+          <span>核能占比</span><b>~85%</b>
+          <span>PE(TTM)</span><b>~18x</b>
+          <span>2025净利</span><b>~105亿</b>
+          <span>ROE</span><b>~9.5%</b>
+        </div>
+      </div>
+      <!-- 中国核建 -->
+      <div class="stock-card">
+        <div class="stock-name">中国核建</div>
+        <div class="stock-code">601611 · 沪市主板</div>
+        <span class="rating-badge rating-b">B+ 级 · 弹性仓位</span>
+        <div class="stock-role">核电站工程建设垄断地位（市占率80%+）</div>
+        <div class="stock-metrics">
+          <span>核能占比</span><b>~37%</b>
+          <span>PE(TTM)</span><b>~26x</b>
+          <span>2025营收</span><b>~1100亿</b>
+          <span>订单饱满度</span><b>高</b>
+        </div>
+      </div>
+      <!-- 中核科技 -->
+      <div class="stock-card">
+        <div class="stock-name">中核科技</div>
+        <div class="stock-code">000777 · 深市主板</div>
+        <span class="rating-badge rating-b">B 级 · 观察/小仓</span>
+        <div class="stock-role">核电阀门细分龙头，中核集团旗下</div>
+        <div class="stock-metrics">
+          <span>核能占比</span><b>~60%+</b>
+          <span>PE(TTM)</span><b>~45x</b>
+          <span>市值规模</span><b>较小</b>
+          <span>弹性空间</span><b>大</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn" style="margin-top:18px">
+      <div class="callout-title">📌 关于中国广板的说明</div>
+      中国广核(003816)在深交所中小板挂牌，严格来说不完全属于"主板"。但考虑到其体量（市值超2000亿）、流动性和行业地位，
+      以及部分券商终端将其归入广义主板范畴，此处保留为A级推荐。如需严格执行"纯主板"标准，可将中国核建(601611)提升为核心替代标的。
+    </div>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">四家对比一览</h3>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>中国核电</th>
+          <th>中国广核</th>
+          <th>中国核建</th>
+          <th>中核科技</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>角色定位</td>
+          <td colspan="2">下游运营商（收租模式）</td>
+          <td colspan="2">中游工程/设备商</td>
+        </tr>
+        <tr>
+          <td>商业模式</td>
+          <td colspan="2">高CAPEX → 高OCF → FCF滞后释放</td>
+          <td colspan="2">EPC订单制，随开工节奏波动</td>
+        </tr>
+        <tr>
+          <td>护城河</td>
+          <td>牌照+装机壁垒</td>
+          <td>区位垄断（广东）</td>
+          <td>工程资质垄断(80%+)</td>
+          <td>阀门技术壁垒</td>
+        </tr>
+        <tr>
+          <td>确定性</td>
+          <td colspan="2" style="color:var(--signal-safe);font-weight:600">极高（装机规划刚性）</td>
+          <td style="color:var(--signal-warning);font-weight:600">高（但随审批节奏波动）</td>
+          <td style="color:var(--text-muted)">中等</td>
+        </tr>
+        <tr>
+          <td>估值吸引力</td>
+          <td style="color:var(--signal-safe);font-weight:600">PE ~20x 最优</td>
+          <td style="color:var(--accent);font-weight:600">PE ~18x 最低</td>
+          <td>PE ~26x 合理</td>
+          <td style="color:var(--signal-warning)">PE ~45x 偏高</td>
+        </tr>
+        <tr>
+          <td>适合仓位</td>
+          <td><b>核心持仓 50-60%</b></td>
+          <td><b>价值配置 20-30%</b></td>
+          <td><b>弹性仓位 10-15%</b></td>
+          <td><b>观察仓 &lt;10%</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ========== 第四章：现金流数学模型 ========== -->
+  <div class="chapter" id="ch4">
+    <h2 class="chapter-title"><span class="chapter-num">4</span>现金流数学模型（10年预测：2025A-2035E）</h2>
+
+    <div class="callout callout-info">
+      <div class="callout-title">🔬 模型方法论</div>
+      以<b>中国核电</b>为核心建模对象（数据最全、代表性最强），采用自上而下方法：<br>
+      装机规划(GW) → 发电量(TWh) → 营收(亿元) → 净利润 → 经营现金流(OCF) → 资本支出(CapEx) → 自由现金流(FCF)
+    </div>
+
+    <h3 style="margin:0 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">4.1 核心假设参数</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>参数</th><th>符号</th><th>基准值</th><th>乐观</th><th>悲观</th><th>依据</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="row-label">单GW装机造价</td><td><i>CapCost</i></td><td>160 亿</td><td>150 亿</td><td>170 亿</td><td>华龙一号参考</td></tr>
+        <tr><td class="row-label">年均利用小时</td><td><i>Hrs</i></td><td>7,800 h</td><td>8,000 h</td><td>7,500 h</td><td>历史均值</td></tr>
+        <tr><td class="row-label">上网电价(不含税)</td><td><i>P</i></td><td>0.37 元/kWh</td><td>0.38</td><td>0.35</td><td>标杆电价</td></tr>
+        <tr><td class="row-label">毛利率</td><td><i>GPM</i></td><td>46%</td><td>48%</td><td>43%</td><td>2025年报</td></tr>
+        <tr><td class="row-label">OCF/净利率倍数</td><td><i>k</i></td><td>4.0x</td><td>4.2x</td><td>3.8x</td><td>折旧非现金支出特性</td></tr>
+        <tr><td class="row-label">年新增装机</td><td><i>ΔC</i></td><td>3.5-5 GW</td><td>5 GW</td><td>3 GW</td><td>核准节奏</td></tr>
+        <tr><td class="row-label">WACC</td><td><i>r</i></td><td>7.5%</td><td>7.0%</td><td>8.5%</td><td>央企beta估算</td></tr>
+        <tr><td class="row-label">永续增长率</td><td><i>g</i></td><td>2.0%</td><td>2.5%</td><td>1.5%</td><td>GDP增速匹配</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">4.2 数学模型公式</h3>
+
+    <div class="formula-box">
+      <b>Step 1 — 发电量：</b><br>
+      <span class="var">E(t)</span> = <span class="var">C(t)</span> × <span class="var">Hrs</span> × 10⁶ 　（MWh/年）<br><br>
+      <b>Step 2 — 营业收入：</b><br>
+      <span class="var">Rev(t)</span> = <span class="var">E(t)</span> × <span class="var">P</span> ÷ 10⁸ 　（亿元）<br><br>
+      <b>Step 3 — 净利润：</b><br>
+      <span class="var">NI(t)</span> = <span class="var">Rev(t)</span> × <span class="var">GPM</span> × (1 - T) 　（T=有效税率~18%）<br><br>
+      <b>Step 4 — 经营现金流（核心！）：</b><br>
+      <span class="var">OCF(t)</span> = <span class="var">NI(t)</span> + <span class="var">Depreciation(t)</span> ≈ <span class="var">k</span> × <span class="var">NI(t)</span> 　（k≈4.0，因巨额折旧加回）<br><br>
+      <b>Step 5 — 资本支出：</b><br>
+      <span class="var">CapEx(t)</span> = <span class="var">ΔC(t)</span> × <span class="var">CapCost</span> 　（新建机组投资，分多年投入）<br><br>
+      <b>Step 6 — 自由现金流：</b><br>
+      <span class="var highlight" style="background:rgba(26,115,232,0.1);padding:0 4px;border-radius:3px">FCF(t)</span> = <span class="var">OCF(t)</span> - <span class="var">CapEx(t)</span> 　<span style="color:var(--signal-safe)">↑ 这是决定股价的核心变量 ↑</span>
+    </div>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">4.3 中国核电 10年现金流预测（中性情景）</h3>
+
+    <div class="chart-section">
+      <h4>💰 OCF / CapEx / FCF 三色柱状图（2025A-2035E）</h4>
+      <canvas id="chartCashFlow"></canvas>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th><th>2029E</th><th>2030E</th><th>2035E</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">装机容量 (GW)</td>
+          <td>25.0</td><td class="highlight">28.5</td><td class="highlight">33.0</td><td class="highlight">38.0</td><td class="highlight">43.0</td><td class="highlight">48.0</td><td style="color:var(--accent);font-weight:700">65.0</td>
+        </tr>
+        <tr>
+          <td class="row-label">发电量 (TWh)</td>
+          <td>195</td><td>222</td><td>257</td><td>296</td><td>335</td><td>374</td><td>507</td>
+        </tr>
+        <tr>
+          <td class="row-label">营业收入 (亿)</td>
+          <td>821</td><td>893</td><td>1012</td><td>1148</td><td>1278</td><td>1408</td><td>1880</td>
+        </tr>
+        <tr>
+          <td class="row-label">净利润 (亿)</td>
+          <td>93</td><td>96</td><td>108</td><td>122</td><td>135</td><td>147</td><td style="color:var(--up-color);font-weight:700">195</td>
+        </tr>
+        <tr>
+          <td class="row-label">经营现金流 OCF (亿)</td>
+          <td>374</td><td>395</td><td>430</td><td>485</td><td>540</td><td>585</td><td style="color:var(--up-color);font-weight:700">770</td>
+        </tr>
+        <tr>
+          <td class="row-label">资本支出 CapEx (亿)</td>
+          <td>380</td><td style="color:var(--down-color);font-weight:600">450</td><td style="color:var(--down-color);font-weight:600">480</td><td>420</td><td>350</td><td>280</td><td>180</td>
+        </tr>
+        <tr style="background:rgba(26,115,232,0.04)!important">
+          <td class="row-label" style="background:rgba(26,115,232,0.08)!important"><b>自由现金流 FCF (亿)</b></td>
+          <td style="color:var(--down-color);font-weight:700">-6</td>
+          <td style="color:var(--down-color);font-weight:700">-55</td>
+          <td style="color:var(--down-color);font-weight:700">-50</td>
+          <td class="positive">65</td>
+          <td class="positive" style="font-weight:700">190</td>
+          <td class="positive" style="font-weight:700">305</td>
+          <td class="positive" style="font-weight:700;background:rgba(67,160,71,0.08)">590</td>
+        </tr>
+        <tr>
+          <td class="row-label">FCF/市值比</td>
+          <td>-0.3%</td><td>-2.7%</td><td>-2.5%</td><td>3.2%</td><td class="positive">9.4%</td><td class="positive">15.1%</td><td class="positive" style="font-weight:700">29.2%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="year">2025-2028：CapEx投入期 🔨</div>
+        <div class="desc">新建机组集中投产，资本支出高达400-480亿/年。虽然OCF持续增长至485亿，但FCF仍为负或微正。<b>这个阶段股价受压——市场看到的是"烧钱"</b>。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2029：FCF拐点 🔄</div>
+        <div class="desc">前期机组陆续投产完毕，新增装机节奏放缓，CapEx开始下降到350亿以下。FCF首次大幅转正(+190亿)。<b>市场认知开始转变的关键时点</b>。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="year">2030-2035：FCF释放期 💰</div>
+        <div class="desc">CapEx降至280→180亿，而OCF继续增至770亿。FCF从305亿飙升至590亿。<b>FCF/市值比达到29%，意味着理论上每年可以回购29%的流通股</b>——这是重估的核心催化剂。</div>
+      </div>
+    </div>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">4.4 为什么OCF是净利润的4倍？</h3>
+    <div class="callout callout-info">
+      <div class="callout-title">💡 核电"印钞机"模式的本质</div>
+      <p style="margin-bottom:8px">
+        核电站的会计利润被<strong>巨额折旧</strong>严重压制：
+      </p>
+      <ul style="margin:6px 0 0 18px">
+        <li>单台华龙一号机组造价约160-200亿元</li>
+        <li>折旧年限25-40年（取决于政策）</li>
+        <li>年折旧额 = 200亿 ÷ 30年 ≈ <b>6.7亿/台/年</b></li>
+        <li>拥有25+台机组的中国核电，年折旧额超过<b>270亿</b></li>
+        <li>这笔钱在利润表上是"费用"，但实际上不需要现金流出</li>
+        <li><b>所以 OCF = 净利润 + 折旧 ≈ 93 + 270+ ≈ 370+ 亿</b></li>
+      </ul>
+      这就是为什么核电企业的经营现金流看起来像印钞机——因为折旧是非现金支出。
+      一旦CapEx高峰过去，这些现金就可以分红、还债或回购股票。
+    </div>
+  </div>
+
+  <!-- ========== 第五章：DCF估值 ========== -->
+  <div class="chapter" id="ch5">
+    <h2 class="chapter-title"><span class="chapter-num">5</span>DCF估值与股价预测</h2>
+
+    <h3 style="margin:0 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">5.1 DCF模型公式</h3>
+    <div class="formula-box">
+      <b>企业价值 EV = Σ [ FCF(t) / (1+r)^t ] + [ FCF(n+1) / (r-g) ] / (1+r)^n</b><br><br>
+      其中：<br>
+      <span class="var">FCF(t)</span> = 第t年自由现金流（来自第四章模型）<br>
+      <span class="var">r</span> = WACC 加权平均资本成本（基准7.5%）<br>
+      <span class="var">g</span> = 永续增长率（基准2.0%）<br>
+      <span class="var">n</span> = 显性预测期（取10年，2026E-2035E）<br><br>
+      <b>每股价值 = (EV - 净债务) / 总股本</b>
+    </div>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">5.2 三情景估值结果</h3>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>情景</th><th>WACC</th><th>g</th><th>EV(亿元)</th><th>每股价值(元)</th><th>vs 当前(9.04元)</th><th>隐含回报</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label" style="color:var(--signal-safe)">😊 乐观</td>
+          <td>7.0%</td><td>2.5%</td>
+          <td class="positive" style="font-weight:700">2,850 - 3,100</td>
+          <td class="positive" style="font-weight:700">13.9 - 15.2</td>
+          <td class="positive">+54% ~ +68%</td>
+          <td class="positive">~15% CAGR</td>
+        </tr>
+        <tr style="background:rgba(26,115,232,0.05)!important">
+          <td class="row-label" style="color:var(--accent);font-weight:700;background:rgba(26,115,232,0.1)">😐 中性（基准）</td>
+          <td style="font-weight:700">7.5%</td><td style="font-weight:700">2.0%</td>
+          <td class="highlight" style="font-weight:700;font-size:1.05em">2,400 - 2,650</td>
+          <td class="highlight" style="font-weight:700;font-size:1.05em">11.7 - 12.9</td>
+          <td class="positive" style="font-weight:700">+29% ~ +43%</td>
+          <td class="positive" style="font-weight:700">~9-11% CAGR</td>
+        </tr>
+        <tr>
+          <td class="row-label" style="color:var(--signal-danger)">☹️ 悲观</td>
+          <td>8.5%</td><td>1.5%</td>
+          <td>1,850 - 2,100</td>
+          <td>9.0 - 10.2</td>
+          <td style="color:var(--flat-color)">0% ~ +13%</td>
+          <td style="color:var(--flat-color)">~0-3% CAGR</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-success">
+      <div class="callout-title">🎯 结论</div>
+      <b>中性情景下，中国核电合理估值区间 11.7-12.9 元，较当前 9.04 元有 29-43% 的上行空间。</b><br>
+      如果持有到2030年前后FCF大规模释放期，上行空间更大。当前价位（PE ~20x）处于历史中枢偏低位置，
+      是逐步建仓的合理窗口。但需注意2026-2028年FCF为负阶段可能压制股价表现，需要有2-3年的耐心。
+    </div>
+
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">5.3 敏感性分析：哪个变量最关键？</h3>
+
+    <div class="chart-section">
+      <h4>🎚️ 各变量对估值的影响程度排序</h4>
+      <canvas id="chartSensitivity"></canvas>
+    </div>
+
+    <table class="compare-table">
+      <tr>
+        <th>变量</th>
+        <th>敏感度排名</th>
+        <th>影响方向</th>
+        <th>可控性</th>
+      </tr>
+      <tr>
+        <td><b>上网电价</b></td>
+        <td><span style="color:var(--signal-danger);font-weight:700">№1 最高</span></td>
+        <td>电价↓1分 → 利润↓~15%</td>
+        <td><span style="color:var(--signal-danger)">不可控（政策决定）</span></td>
+      </tr>
+      <tr>
+        <td><b>装机增速</b></td>
+        <td><span style="color:var(--signal-warning);font-weight:700">№2</span></td>
+        <td>少建1GW → 10年少~160亿营收</td>
+        <td><span style="color:var(--signal-safe)">高确定（国家规划刚性）</span></td>
+      </tr>
+      <tr>
+        <td><b>铀价</b></td>
+        <td><span style="color:var(--text-muted);font-weight:700">№3 较低</span></td>
+        <td>铀价翻倍 → 利润↓~8-10%（实际值）</td>
+        <td><span style="color:var(--signal-safe)">有缓冲（长协+库存）</span></td>
+      </tr>
+      <tr>
+        <td><b>利率/WACC</b></td>
+        <td><span style="color:var(--signal-warning);font-weight:700"> №4 中等</span></td>
+        <td>r↑1% → EV↓~12-15%</td>
+        <td><span style="color:var(--text-muted)">宏观环境决定</span></td>
+      </tr>
+    </table>
+
+    <div class="callout callout-warn">
+      <div class="callout-title">⚡ 最重要的一个认知</div>
+      <b>电价是最大的下行风险，但装机增速是最确定的向上驱动力。</b><br>
+      二者形成对冲：如果市场化改革导致电价小幅下行（比如-5%），但装机如期增长（年增3.5-5GW），
+      总营收和利润仍然会增长——只是增速放缓而已。这就是为什么核电投资的"安全边际"在于装机规划的确定性。
+    </div>
+  </div>
+
+  <!-- ========== 第六章：跟踪事项 ========== -->
+  <div class="chapter" id="ch6">
+    <h2 class="chapter-title"><span class="chapter-num">6</span>关键跟踪事项清单</h2>
+
+    <h3 style="margin:0 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">按优先级排列的跟踪指标</h3>
+
+    <ul class="checklist">
+      <li class="prio-high">
+        <span class="prio-tag high">P0 紧急</span>
+        <div>
+          <b>核电核准公告</b> — 每年国务院常务会议核准的新建机组数量和具体项目。
+          目标：年核准8-10台。如果某年仅批4-5台，需重新评估模型假设。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注时间：通常每年Q1-Q3分批公布 | 来源：国家发改委官网、新华社</span>
+        </div>
+      </li>
+      <li class="prio-high">
+        <span class="prio-tag high">P0 紧急</span>
+        <div>
+          <b>电力市场化改革进展 / 上网电价变动</b> — 核电参与电力市场交易的比例变化、
+          竞价成交均价是否低于标杆电价、各省核电电价政策调整。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注频率：月度/季度 | 来源：各电力交易中心、广东/浙江/江苏等省发改委</span>
+        </div>
+      </li>
+      <li class="prio-mid">
+        <span class="prio-tag mid">P1 重要</span>
+        <div>
+          <b>在建机组进度</b> — 每台在建核电机组的冷试/热试/装料/并网节点是否按计划推进。
+          延误将直接推迟OCF释放时点。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注频率：季度 | 来源：中国核电/广核定期报告、NNSA（国家核安全局）</span>
+        </div>
+      </li>
+      <li class="prio-mid">
+        <span class="prio-tag mid">P1 重要</span>
+        <div>
+          <b>铀价与长协谈判进展</b> — 现货价格走势、中国企业新一轮长协签约价及期限。
+          特别关注Kazatomprom产量指引更新（每年2月/8月）。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注频率：周度（现货）/年度（长协）| 来源：UXC、TradeTech、公司公告</span>
+        </div>
+      </li>
+      <li class="prio-mid">
+        <span class="prio-tag mid">P1 重要</span>
+        <div>
+          <b>公司财务数据</b> — 季报/年报中的OCF、CapEx、资产负债率、分红比例变化。
+          验证模型预测的准确性，及时修正偏差。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注频率：季度（季报）/半年度（半年报/年报）| 来源：巨潮资讯网、同花顺</span>
+        </div>
+      </li>
+      <li class="prio-low">
+        <span class="prio-tag low">P2 关注</span>
+        <div>
+          <b>宏观经济环境</b> — GDP增速、全社会用电量增速、工业用电需求。
+          影响整体电力需求和核电利用小时数的上限。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注频率：月度/季度 | 来源：国家统计局、中电联</span>
+        </div>
+      </li>
+      <li class="prio-low">
+        <span class="prio-tag low">P2 关注</span>
+        <div>
+          <b>国际核能动态</b> — 全球新项目批准（SMR小堆商业化进程、AI驱动的数据中心核电需求）、
+          国际铀贸易政策变化（如俄罗斯铀制裁升级）。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注频率：不定期 | 来源：IAEA、World Nuclear News</span>
+        </div>
+      </li>
+      <li class="prio-low">
+        <span class="prio-tag low">P2 关注</span>
+        <div>
+          <b>安全事故（尾部风险监控）</b> — 全球范围内任何核电站运行事件（INES等级1级以上）。
+          虽然概率极低，但对情绪和股价的瞬时冲击巨大。建立事件应对预案（而非恐慌性抛售）。
+          <br><span style="font-size:0.8rem;color:var(--text-muted)">关注方式：新闻推送 | 应对策略：视为加仓机会（如果基本面未变）</span>
+        </div>
+      </li>
+    </ul>
+
+    <h3 style="margin:28px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">模型修正触发条件</h3>
+    <div class="callout callout-warn">
+      <div class="callout-title">🔔 出现以下任一信号时，应立即重新审视模型假设：</div>
+      <ol style="margin:8px 0 0 20px;color:var(--text-secondary);line-height:1.75">
+        <li>连续两年年核准机组 &lt; 5台（装机增速假设失效）</li>
+        <li>核电市场化交易均价较标杆电价下跌 &gt; 10%（电价假设失效）</li>
+        <li>发生 INES 2级及以上核安全事件（系统性重估风险）</li>
+        <li>公司OCF/净利润倍数从4x持续下滑至3x以下（折旧逻辑变）</li>
+        <li>WACC 因宏观环境变化超过 9%（估值分母端恶化）</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 报告尾 -->
+  <div class="report-header" style="background:linear-gradient(135deg,rgba(67,160,71,0.05) 0%,rgba(67,160,71,0.01) 100%)">
+    <h3 style="margin-bottom:12px">📌 免责声明</h3>
+    <p style="color:var(--text-muted);font-size:0.84rem;line-height:1.7">
+      本报告基于公开信息和作者构建的数学模型进行分析，仅供参考，不构成任何投资建议。
+      模型假设可能与实际情况存在偏差，过往表现不代表未来收益。股市有风险，投资需谨慎。
+      数据来源：各公司年报、国家能源局、高盛研究报告、财新、同花顺、东方财富等。
+      所有财务预测均为作者基于特定假设的主观估计，不应作为交易决策的唯一依据。
+    </p>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 月泽小猫猫的逻辑库 | 研究报告 #0002</p>
+  <p style="margin-top:6px">数据来源：公司年报 / 高盛 / 财新 / 同花顺 / 东方财富 | 仅供参考，不构成投资建议</p>
+  <p style="margin-top:6px"><a href="../index.html">← 返回首页</a></p>
+</footer>
+
+<script src="../app.js"></script>
+<!-- Chart.js for inline charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+(function(){
+  const ctx = function(id){ return document.getElementById(id).getContext('2d'); };
+  const DARK = document.documentElement.dataset.theme === 'dark';
+  const tc = DARK ? '#e6edf3' : '#1a1a2e';
+  const sc = DARK ? '#768390' : '#555';
+  const gc = DARK ? '#30363d' : '#e0e0e0';
+  const ac = DARK ? '#58a6ff' : '#1a73e8';
+  const upColor = '#e53935';
+  const downColor = '#43a047';
+
+  // Chart 1: 铀价历史
+  new Chart(ctx('chartUraniumPrice'),{
+    type:'line',
+    data:{
+      labels:['2007','2008','2010','2011','2012','2014','2016','2018','2020','2021','2022','2023','2024','2025','2026'],
+      datasets:[
+        {label:'现货价($/lb)',data:[136,90,70,110,105,56,28,21,30.6,48,49,91,81,86,86],borderColor:'#1a73e8',backgroundColor:'rgba(26,115,232,0.1)',fill:true,tension:0.3,pointRadius:3},
+        {label:'长协价($/lb)',data:[95,85,65,95,85,60,42,33,34,44,52,78,88,94,94],borderColor:'#fb8c00',backgroundColor:'transparent',borderDash:[5,5],tension:0.3,pointRadius:2}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}},title:{display:true,text:'铀价历史 vs 当前（2007-2026）',color:tc}}},
+    scales:{y:{title:{display:true,text:'$/lb',color:sc},ticks:{color:sc},grid:{color:gc}},
+      x:{ticks:{color:sc},grid:{color:gc}}}
+  });
+
+  // Chart 2: 供需
+  new Chart(ctx('chartUraniumSupplyDemand'),{
+    type:'bar',
+    data:{
+      labels:['2023','2024','2025E','2026E','2027E','2028E','2030E'],
+      datasets:[
+        {label:'全球需求',data:[18.2,19.5,20.8,22.0,23.5,25.0,28.5],backgroundColor:'rgba(229,57,53,0.7)',borderRadius:4},
+        {label:'一级供给',data:[18.0,17.8,17.5,17.0,16.8,17.2,19.0],backgroundColor:'rgba(67,160,71,0.7)',borderRadius:4},
+        {label:'供给缺口%',data:[1.1,8.7,15.9,22.7,28.5,31.4,33.3],type:'line',borderColor:'#fb8c00',backgroundColor:'transparent',yAxisID:'y1'}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc}}},
+      scales:{
+        y:{title:{display:true,text:'万吨',color:sc},ticks:{color:sc},grid:{color:gc}},
+        y1:{position:'right',title:{display:true,text:'缺口%',color:sc},ticks:{color:sc,callback:function(v){return v+'%';},grid:{display:false}},
+        x:{ticks:{color:sc},grid:{color:gc}}
+      }}
+  });
+
+  // Chart 3: 中国自给率
+  new Chart(ctx('chartChinaSelfSufficiency'),{
+    type:'line',
+    data:{
+      labels:['2020','2021','2022','2023','2024','2025E','2026E','2027E','2028E','2030E'],
+      datasets:[{
+        label:'铀自给率(%)',
+        data:[19,24,30,35,42.3,47,52,57,62,70],
+        borderColor:'#1a73e8',backgroundColor:'rgba(26,115,232,0.1)',
+        fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'#1a73e8'
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:tc}},title:{display:true,text:'目标：2030年达到70%',color:sc,font:{size:12}}}}
+  });
+
+  // Chart 4: 铀价敏感性
+  new Chart(ctx('chartUraniumSensitivity'),{
+    type:'bar',
+    data:{
+      labels:['基准\n+$0','+$20/lb\n(+23%)','+$43/lb\n(+50%)','+$86/lb\n(+100%)'],
+      datasets:[
+        {label:'度电成本增加(元/MWh)',data:[0,8,17,34],backgroundColor:'rgba(251,140,0,0.7)',borderRadius:4,yAxisID:'y'},
+        {label:'理论净利影响(%)',data:[0,-7,-13,-26],backgroundColor:'rgba(229,57,53,0.6)',borderRadius:4,yAxisID:'y1'},
+        {label:'实际净利影响(%)',data:[0,-3,-6,-9],backgroundColor:'rgba(67,160,71,0.6)',borderRadius:4,yAxisID:'y1'}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:tc}}},
+      scales:{
+        y:{title:{display:true,text:'元/MWh',color:sc},ticks:{color:sc},grid:{color:gc}},
+        y1:{position:'right',title:{display:true,text:'影响 %',color:sc},ticks:{color:sc},grid:{display:false}},
+        x:{ticks:{color:sc},grid:{color:gc}}
+      }}
+  });
+
+  // Chart 5: 现金流三色图
+  new Chart(ctx('chartCashFlow'),{
+    type:'bar',
+    data:{
+      labels:['2025A','2026E','2027E','2028E','2029E','2030E','2035E'],
+      datasets:[
+        {label:'经营现金流 OCF',data:[374,395,430,485,540,585,770],backgroundColor:'rgba(67,160,71,0.7)',borderRadius:4},
+        {label:'资本支出 CapEx',data:[380,450,480,420,350,280,180],backgroundColor:'rgba(229,57,53,0.7)',borderRadius:4},
+        {label:'自由现金流 FCF',data:[-6,-55,-50,65,190,305,590],backgroundColor:'rgba(26,115,232,0.85)',borderRadius:4}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:tc}},title:{display:true,text:'FCF转折点：2029年由负转正',color:ac,font:{size:12}}}}
+  });
+
+  // Chart 6: 敏感性排序
+  new Chart(ctx('chartSensitivity'),{
+    type:'bar',
+    data:{
+      labels:['上网电价','装机增速','铀价','利率/WACC'],
+      datasets:[{
+        label:'对估值影响程度',
+        data:[95,75,45,60],
+        backgroundColor:['rgba(229,57,53,0.8)','rgba(251,140,0,0.8)','rgba(67,160,71,0.6)','rgba(251,140,0,0.7)'],
+        borderRadius:6
+      }]
+    },
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{title:{display:true,text:'相对影响力',color:sc},max:100,ticks:{color:sc},grid:{color:gc}},
+        y:{ticks:{color:tc,font:{size:13,weight:'bold'}},grid:{display:false}}}
+    }}
+  );
+})();
+</script>
+
+</body>
+</html>

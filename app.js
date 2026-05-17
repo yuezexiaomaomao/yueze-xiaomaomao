@@ -1,6 +1,6 @@
 // ============================================
 // 投资逻辑监控网站 - 前端交互
-// 功能：搜索、标签筛选、暗色模式、图表、卡片点击
+// 功能：搜索、标签筛选、暗色模式、图表、卡片点击、动态数据加载
 // ============================================
 
 (function () {
@@ -13,6 +13,265 @@
   var $$ = function (sel, ctx) {
     return [].slice.call((ctx || document).querySelectorAll(sel));
   };
+
+  // --- 动态数据加载 ---
+  var DATA_BASE = (function () {
+    // 自动检测 data/ 目录的基础路径
+    var path = window.location.pathname;
+    if (path.indexOf('/stocks/') !== -1 || path.indexOf('/reports/') !== -1) {
+      return '../data/';
+    }
+    return 'data/';
+  })();
+
+  /** 从 data/*.json 加载并渲染到页面上 */
+  function loadDashboardData() {
+    // 1. 加载 index.json 获取更新时间
+    fetch(DATA_BASE + 'index.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (idx) {
+        renderUpdateTime(idx.updated_at);
+      })
+      .catch(function () { /* 离线时静默 */ });
+
+    // 2. 找出所有带 data-sector-id 的容器，逐个加载对应 JSON
+    var containers = $$('[data-sector-id]');
+    containers.forEach(function (container) {
+      var sid = container.dataset.sectorId;
+      if (!sid) return;
+      fetch(DATA_BASE + sid + '.json', { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) { renderSectorData(container, data); })
+        .catch(function () { /* 离线时保留 HTML 写死的值 */ });
+    });
+
+    // 3. 如果是详情页（有 detail-page 标记），用 URL 推断 sector_id
+    var detailPage = $('.detail-page');
+    if (detailPage && !detailPage.dataset.sectorId) {
+      var path = window.location.pathname;
+      var match = path.match(/\/stocks\/(\w+)\.html/);
+      if (match) {
+        var inferredId = match[1];
+        fetch(DATA_BASE + inferredId + '.json', { cache: 'no-store' })
+          .then(function (r) { return r.json(); })
+          .then(function (data) { renderDetailPage(data); })
+          .catch(function () {});
+      }
+    } else if (detailPage && detailPage.dataset.sectorId) {
+      fetch(DATA_BASE + detailPage.dataset.sectorId + '.json', { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) { renderDetailPage(data); })
+        .catch(function () {});
+    }
+  }
+
+  /** 渲染最后更新时间 */
+  function renderUpdateTime(isoStr) {
+    try {
+      var d = new Date(isoStr);
+      var fmt = d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0') + ' ' +
+                String(d.getHours()).padStart(2, '0') + ':' +
+                String(d.getMinutes()).padStart(2, '0');
+      var els = $$('.last-update-time');
+      els.forEach(function (el) { el.textContent = fmt; });
+      // 也更新 header 区域的 last-update
+      var headerUpdate = $('.last-update span:not(.dot)');
+      if (headerUpdate) headerUpdate.textContent = '最后更新：' + fmt;
+    } catch (e) {}
+  }
+
+  /** 将 JSON 数据渲染到首页 sector-card 上 */
+  function renderSectorData(card, data) {
+    if (!data || !data.stocks) return;
+
+    // 更新信号徽章
+    var badge = $('.signal-badge', card);
+    if (badge && data.overall_signal) {
+      badge.className = 'signal-badge ' + (data.overall_signal || 'warning');
+      badge.textContent = data.signal_message || '';
+    }
+
+    // 更新各指标 mini-indicator 值
+    if (data.indicators) {
+      data.indicators.forEach(function (ind) {
+        var key = ind.key;
+        // 找对应的 mini-indicator
+        $$('.mini-indicator', card).forEach(function (mi) {
+          var label = ($('.label', mi) || {}).textContent || '';
+          if (label.trim() === ind.name) {
+            var valEl = $('.value', mi);
+            if (valEl && ind.current_value != null) {
+              var v = ind.current_value;
+              var unit = ind.unit || '';
+              if (unit === '%' || key === 'profit_growth' || key === 'roe' || key === 'price_vs_ma20') {
+                valEl.textContent = v.toFixed(2) + '%';
+              } else {
+                valEl.textContent = v.toFixed(2);
+              }
+
+              // 根据信号变色
+              valEl.className = 'value';
+              if (ind.signal === 'good') valEl.classList.add('good');
+              else if (ind.signal === 'bad') valEl.classList.add('bad');
+            }
+          }
+        });
+      });
+    }
+
+    // 更新个股明细（如果卡片内有 stock-prices 区域）
+    if (data.stocks.length > 0) {
+      updateStockChips(card, data.stocks);
+    }
+  }
+
+  /** 更新股票 chip 显示最新价和涨跌 */
+  function updateStockChips(card, stocks) {
+    $$('.stock-chip', card).forEach(function (chip) {
+      var name = chip.textContent.trim();
+      var match = stocks.find(function (s) { return s.name === name; });
+      if (!match) return;
+
+      var price = match.price;
+      var change = match.change_pct;
+      var colorStyle = '';
+      if (change > 0) colorStyle = 'color:var(--up-color)';
+      else if (change < 0) colorStyle = 'color:var(--down-color)';
+
+      chip.innerHTML = '<b>' + name + '</b> ' +
+        '<span style="font-weight:600;' + colorStyle + '">' + price.toFixed(2) + '</span>' +
+        '<span style="font-size:11px;' + colorStyle + '">(' + (change >= 0 ? '+' : '') + change.toFixed(2) + '%)</span>';
+    });
+  }
+
+  /** 将 JSON 数据渲染到详情页（stocks/*.html） */
+  function renderDetailPage(data) {
+    if (!data) return;
+
+    var page = document.body;  // 整个 body 作为上下文
+
+    // 1. 更新时间戳
+    renderUpdateTime(data.fetched_at);
+
+    // 2. 更新信号面板
+    if (data.overall_signal) {
+      var sigVal = $('.signal-value', page);
+      if (sigVal) {
+        sigVal.className = 'signal-value ' + (data.overall_signal || 'warning');
+        if (data.overall_signal === 'safe') sigVal.textContent = '\u2705';
+        else if (data.overall_signal === 'danger') sigVal.textContent = '\u26A0\uFE0F';
+        else sigVal.textContent = '\U0001F7E1';
+      }
+      var sigDesc = $('.signal-desc', page);
+      if (sigDesc) sigDesc.textContent = data.signal_message || '';
+    }
+
+    // 3. 更新关联标的数量
+    if (data.stocks) {
+      var countVal = $$('.signal-card .signal-value')[1];
+      if (countVal) countVal.textContent = data.stocks.length + ' \u53EA\u80A1\u7968';
+      var countDesc = $$('.signal-card .signal-desc')[1];
+      if (countDesc) {
+        countDesc.textContent = data.stocks.map(function (s) { return s.name; }).join('\u3001');
+      }
+    }
+
+    // 4. 更新指标看板
+    if (data.indicators) {
+      data.indicators.forEach(function (ind) {
+        // 找 indicator-card by ind-name
+        $$('.indicator-card', page).forEach(function (ic) {
+          var nameEl = ($('.ind-name', ic) || {}).textContent || '';
+          if (nameEl.trim() === ind.name) {
+            var valEl = ($('.ind-value', ic) || {});
+            if (valEl && ind.current_value != null) {
+              var v = ind.current_value;
+              var unit = ind.unit || '';
+              if (unit === '%') valEl.textContent = v.toFixed(2) + '%';
+              else valEl.textContent = v.toFixed(2);
+
+              // 进度条
+              var barFill = ($('.ind-bar-fill', ic) || {});
+              if (barFill && ind.threshold_low != null && ind.threshold_high != null) {
+                var range = ind.threshold_high - ind.threshold_low;
+                var pct = ((v - ind.threshold_low) / range) * 100;
+                pct = Math.max(0, Math.min(100, pct));
+                barFill.style.width = pct + '%';
+                barFill.className = 'ind-bar-fill ' + (ind.signal || 'warn');
+              }
+
+              // 值颜色
+              valEl.className = 'ind-value';
+              if (ind.signal === 'good') valEl.classList.add('good');
+              else if (ind.signal === 'bad') valEl.classList.add('bad');
+            }
+          }
+        });
+      });
+    }
+
+    // 5. 更新走势图（如果有 history 数据）
+    if (data.stocks && data.stocks[0] && data.stocks[0].history) {
+      var chartContainer = $('.chart-container[data-type="line"]', page);
+      if (chartContainer) {
+        var stock = data.stocks[0];  // 用第一只股票的历史数据
+        var hist = stock.history || [];
+        var labels = hist.map(function (h) {
+          var d = h.date.split('-');
+          return (d[1] || '') + '/' + (d[2] || '');
+        });
+        var points = hist.map(function (h) {
+          return { date: h.date, value: h.close };
+        });
+        chartContainer.dataset.json = JSON.stringify({
+          type: 'line',
+          labels: labels,
+          points: points,
+          title: (stock.name || '') + ' \u80A2\u4EF7\u8D70\u52BF(120\u65E5)'
+        });
+        // 重新渲染该图表（清除旧的 canvas）
+        var area = chartContainer.querySelector('.chart-canvas-area');
+        if (area) area.innerHTML = '';
+        renderSingleLineChart(chartContainer);
+      }
+    }
+
+    // 6. 更新个股明细表格
+    if (data.stocks) {
+      var tbody = $('table tbody', page);
+      if (tbody) {
+        var rows = '';
+        data.stocks.forEach(function (s) {
+          var changeColor = s.change_pct > 0 ? 'color:var(--up-color)' : (s.change_pct < 0 ? 'color:var(--down-color)' : '');
+          var changePrefix = s.change_pct >= 0 ? '+' : '';
+          rows += '<tr>' +
+            '<td><b>' + s.name + '</b></td>' +
+            '<td style="font-family:monospace">' + s.code + '</td>' +
+            '<td style="font-weight:600;font-variant-numeric:tabular-nums">' + (s.price || 0).toFixed(2) + '</td>' +
+            '<td style="' + changeColor + ';font-weight:600;font-variant-numeric:tabular-nums">' + changePrefix + (s.change_pct || 0).toFixed(2) + '%</td>' +
+            '<td style="font-variant-numeric:tabular-nums">' + ((s.pe_ttm || 0)).toFixed(2) + '</td>' +
+            '<td style="font-variant-numeric:tabular-nums">' + ((s.pb || 0)).toFixed(2) + '</td>' +
+            '</tr>';
+        });
+        tbody.innerHTML = rows;
+      }
+    }
+  }
+
+  /** 单独渲染一个折线图（用于详情页动态更新） */
+  function renderSingleLineChart(container) {
+    var chartType = container.dataset.type;
+    var dataStr = container.dataset.json;
+    if (!dataStr) return;
+    try {
+      var data = JSON.parse(dataStr);
+      if (chartType === 'line') renderLineChart(container, data);
+    } catch (e) {
+      console.error('\u56FE\u8868\u6570\u636E\u89E3\u6790\u5931\u8D25:', e);
+    }
+  }
 
   // --- 暗色模式 ---
   function initTheme() {
@@ -284,6 +543,8 @@
     renderCharts();
     initShare();
     initCardClicks();
+    // 动态加载 JSON 数据
+    loadDashboardData();
   });
 
 })();
