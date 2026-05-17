@@ -228,33 +228,6 @@ a:hover { color: var(--accent-hover); }
   50% { opacity: 0.4; }
 }
 
-/* ========== 标签筛选 ========== */
-.tag-filter {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-
-.tag-btn {
-  padding: 6px 18px;
-  border: 1px solid var(--border-color);
-  border-radius: 20px;
-  background: transparent;
-  color: var(--text-secondary);
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: var(--transition);
-}
-
-.tag-btn:hover,
-.tag-btn.active {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-
 /* ========== 板块卡片网格 ========== */
 .sector-grid {
   display: grid;
@@ -783,9 +756,6 @@ a:hover { color: var(--accent-hover); }
 
 @media (max-width: 480px) {
   .search-wrapper { display: none; }
-
-  .tag-filter { gap: 6px; }
-  .tag-btn { padding: 5px 13px; font-size: 0.8rem; }
 
   .indicator-grid {
     grid-template-columns: 1fr;

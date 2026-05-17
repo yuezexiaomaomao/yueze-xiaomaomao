@@ -304,8 +304,6 @@
         var tag = e.target.tagName.toLowerCase();
         if (tag === 'input' || tag === 'button' || tag === 'a' || tag === 'select') return;
         if (e.target.closest('.search-wrapper')) return;
-        if (e.target.closest('.tag-btn')) return;
-
         var href = card.dataset.href;
         if (href) {
           window.location.href = href;
@@ -346,25 +344,6 @@
       } else if (noResult && (visible.length > 0 || !query)) {
         noResult.remove();
       }
-    });
-  }
-
-  // --- 标签筛选 ---
-  function initTagFilter() {
-    $$('.tag-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        $$('.tag-btn').forEach(function (b) { b.classList.remove('active'); });
-        this.classList.add('active');
-        var tag = this.dataset.tag;
-        $$('.sector-card').forEach(function (card) {
-          if (!tag || tag === 'all') {
-            card.style.display = '';
-          } else {
-            var cardTag = ($('.card-tag', card) || {}).textContent || '';
-            card.style.display = cardTag.trim() === tag ? '' : 'none';
-          }
-        });
-      });
     });
   }
 
@@ -538,7 +517,6 @@
     var themeToggle = $('.theme-toggle');
     if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
     initSearch();
-    initTagFilter();
     initChartTabs();
     renderCharts();
     initShare();
