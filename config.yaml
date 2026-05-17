@@ -1,0 +1,117 @@
+# A股投资逻辑监控网站 - 配置文件
+
+site:
+  name: "投资逻辑监控"
+  subtitle: "数据驱动，逻辑为王"
+  author: "wangr"
+  bilibili_url: ""
+
+# 板块/股票配置列表
+sectors:
+  - id: "nuclear_energy"
+    name: "核能板块"
+    tag: "核能"
+    description: "关注核能产业链相关A股标的的投资机会"
+    stocks:
+      - code: "601985"
+        name: "中国核电"
+        market: "SH"
+      - code: "003816"
+        name: "中国广核"
+        market: "SZ"
+    indicators:
+      - name: "PE(TTM)"
+        key: "pe_ttm"
+        unit: ""
+        threshold_high: 30
+        threshold_low: 15
+        direction: "low_is_better"
+      - name: "PB"
+        key: "pb"
+        unit: ""
+        threshold_high: 3
+        threshold_low: 1.5
+        direction: "low_is_better"
+      - name: "净利润增速(%)"
+        key: "profit_growth"
+        unit: "%"
+        threshold_high: null
+        threshold_low: 10
+        direction: "high_is_better"
+      - name: "ROE(%)"
+        key: "roe"
+        unit: "%"
+        threshold_high: null
+        threshold_low: 8
+        direction: "high_is_better"
+      - name: "股价相对MA20"
+        key: "price_vs_ma20"
+        unit: "%"
+        threshold_high: 10
+        threshold_low: -10
+        direction: "range"
+    logic_article: |
+      ## 核能板块投资逻辑
+
+      ### 为什么关注核能？
+
+      1. **政策确定性高**：国家"双碳"目标下，核电作为稳定基荷能源的战略地位明确
+      2. **审批加速**：近年来核电核准节奏明显加快，每年新批机组数量提升
+      3. **产业链长**：从上游铀资源、设备制造到下游运营，覆盖面广
+
+      ### 核心判断指标
+
+      | 指标 | 说明 |
+      |------|------|
+      | PE(TTM) | 反映当前估值水平，历史分位越低越有吸引力 |
+      | PB | 净资产倍率，适合重资产行业估值参考 |
+      | 净利润增速(%) | 核心盈利能力，持续正增长说明基本面健康 |
+      | ROE(%) | 资本回报率，核电企业通常在8-12% |
+      | 股价相对MA20 | 短期趋势判断，避免追涨 |
+
+      ### 临界点信号
+
+      当以下条件**同时满足**时，发出买入信号：
+      - PE(TTM) < 历史均值 - 1个标准差
+      - 净利润增速 > 0（转正或保持增长）
+      - 股价跌破MA20但未破位（短期超跌）
+
+      *数据每日收盘后自动更新，最后更新时间见页面底部*
+    signal_status: "watching"
+    signal_message: "持续观察中，尚未触发临界点"
+
+  - id: "renewable_energy"
+    name: "新能源板块"
+    tag: "新能源"
+    description: "关注新能源产业链投资机会（示例，待填充）"
+    stocks:
+      - code: "600438"
+        name: "通威股份"
+        market: "SH"
+    indicators:
+      - name: "PE(TTM)"
+        key: "pe_ttm"
+        unit: ""
+        threshold_high: 25
+        threshold_low: 12
+        direction: "low_is_better"
+      - name: "净利润增速(%)"
+        key: "profit_growth"
+        unit: "%"
+        threshold_high: null
+        threshold_low: 15
+        direction: "high_is_better"
+    logic_article: |
+      ## 新能源板块投资逻辑
+
+      （待补充详细分析...）
+
+      *数据每日收盘后自动更新*
+    signal_status: "watching"
+    signal_message: "持续观察中"
+
+# 全局设置
+settings:
+  update_time: "15:30"
+  data_source: "akshare"
+  chart_days: 120
