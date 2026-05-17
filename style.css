@@ -108,17 +108,12 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-primary);
 }
 
-.nav-brand .brand-icon {
+.nav-brand .brand-avatar {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, var(--accent), #9c27b0);
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
 }
 
 .nav-right {
