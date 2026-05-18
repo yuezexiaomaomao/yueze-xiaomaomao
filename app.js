@@ -16,53 +16,19 @@
 
   // --- 动态数据加载 ---
   var DATA_BASE = (function () {
-    // 自动检测 data/ 目录的基础路径
     var path = window.location.pathname;
-    if (path.indexOf('/stocks/') !== -1 || path.indexOf('/reports/') !== -1) {
+    if (path.indexOf('/reports/') !== -1) {
       return '../data/';
     }
     return 'data/';
   })();
 
-  /** 从 data/*.json 加载并渲染到页面上 */
+  /** 从 data/index.json 加载并更新页面时间戳 */
   function loadDashboardData() {
-    // 1. 加载 index.json 获取更新时间
     fetch(DATA_BASE + 'index.json', { cache: 'no-store' })
       .then(function (r) { return r.json(); })
-      .then(function (idx) {
-        renderUpdateTime(idx.updated_at);
-      })
+      .then(function (idx) { renderUpdateTime(idx.updated_at); })
       .catch(function () { /* 离线时静默 */ });
-
-    // 2. 找出所有带 data-sector-id 的容器，逐个加载对应 JSON
-    var containers = $$('[data-sector-id]');
-    containers.forEach(function (container) {
-      var sid = container.dataset.sectorId;
-      if (!sid) return;
-      fetch(DATA_BASE + sid + '.json', { cache: 'no-store' })
-        .then(function (r) { return r.json(); })
-        .then(function (data) { renderSectorData(container, data); })
-        .catch(function () { /* 离线时保留 HTML 写死的值 */ });
-    });
-
-    // 3. 如果是详情页（有 detail-page 标记），用 URL 推断 sector_id
-    var detailPage = $('.detail-page');
-    if (detailPage && !detailPage.dataset.sectorId) {
-      var path = window.location.pathname;
-      var match = path.match(/\/stocks\/(\w+)\.html/);
-      if (match) {
-        var inferredId = match[1];
-        fetch(DATA_BASE + inferredId + '.json', { cache: 'no-store' })
-          .then(function (r) { return r.json(); })
-          .then(function (data) { renderDetailPage(data); })
-          .catch(function () {});
-      }
-    } else if (detailPage && detailPage.dataset.sectorId) {
-      fetch(DATA_BASE + detailPage.dataset.sectorId + '.json', { cache: 'no-store' })
-        .then(function (r) { return r.json(); })
-        .then(function (data) { renderDetailPage(data); })
-        .catch(function () {});
-    }
   }
 
   /** 渲染最后更新时间 */
