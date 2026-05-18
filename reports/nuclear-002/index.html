@@ -70,7 +70,7 @@ body {
 .report-container { padding: 0; }
 .report-container iframe {
   width: 100%; border: none; display: block;
-  min-height: 800px;
+  min-height: 2000px;
 }
 
 /* History tab */
@@ -223,12 +223,19 @@ function switchTab(name) {
 
 // ===== iframe 自适应高度 =====
 function resizeIframe(iframe) {
-  try {
-    const doc = iframe.contentDocument || iframe.contentWindow.document;
-    iframe.style.height = Math.max(doc.documentElement.scrollHeight, 800) + 'px';
-  } catch(e) {
-    iframe.style.height = '1200px';
+  function setHeight() {
+    try {
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      const h = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight, 2000);
+      iframe.style.height = h + 'px';
+    } catch(e) {
+      iframe.style.height = '5000px';
+    }
   }
+  setHeight();
+  // Chart.js 图表渲染有延迟，500ms后重算一次
+  setTimeout(setHeight, 800);
+  setTimeout(setHeight, 2000);
 }
 
 // ===== 版本列表 =====
