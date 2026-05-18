@@ -27,6 +27,12 @@ body {
   background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
   color: #fff; padding: 40px 32px 32px;
 }
+.breadcrumb { margin-bottom: 12px; font-size: 0.82rem; }
+.breadcrumb a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb a:hover { color: #fff; }
 .hero h1 { font-size: 1.6rem; margin-bottom: 4px; }
 .hero .subtitle { font-size: 0.9rem; opacity: 0.8; margin-bottom: 18px; }
 .dashboard-grid {
@@ -145,6 +151,9 @@ body {
 
 <!-- ========== HERO / 标题 + 仪表板 ========== -->
 <div class="hero">
+  <div class="breadcrumb">
+    <a href="../../index.html">← 返回首页</a>
+  </div>
   <h1>中国核电 (601985.SH) 深度分析</h1>
   <div class="subtitle">核能产业链 · 10年现金流模型 · DCF估值 | 最新更新: 2026-05-18</div>
   <div class="dashboard-grid">
