@@ -1,6 +1,8 @@
 # ============================================
-# 网站生成脚本
-# 读取配置和数据JSON，生成完整静态HTML网站
+# 网站生成脚本 [已弃用]
+# 当前网站架构为手动维护的 index.html + JS动态加载数据，
+# 此脚本为 v1 版本遗留代码，仅保留作为参考。
+# 如需生成板块详情页可复用 generate_detail_page() 函数。
 # 用法: python site_generator.py [--config config.yaml] [--data data/] [--output output/]
 # ============================================
 
@@ -40,8 +42,7 @@ NAVBAR = '''
 <nav class="navbar">
   <div class="nav-inner">
     <a href="{home_url}" class="nav-brand">
-      <span class="brand-icon">投</span>
-      <span>投资逻辑监控</span>
+      <span>月泽小猫猫的逻辑库</span>
     </a>
     <div class="nav-right">
       <div class="search-wrapper">
@@ -314,14 +315,6 @@ def generate_homepage(config, index_data, css_rel, js_rel):
     for item in index_data.get('sectors', []):
         sector_signals[item['id']] = item
 
-    # 收集所有标签
-    tags = set()
-    for sec in sectors:
-        t = sec.get('tag', '')
-        if t:
-            tags.add(t)
-    tags = sorted(tags)
-
     # 板块卡片
     cards_html = ''
     for sector in sectors:
@@ -404,11 +397,6 @@ def generate_homepage(config, index_data, css_rel, js_rel):
       </div>
     </div>'''
 
-    # 标签筛选按钮
-    tags_html = '<button class="tag-btn active" data-tag="all">全部</button>'
-    for tag in tags:
-        tags_html += f'<button class="tag-btn" data-tag="{html_escape(tag)}">{html_escape(tag)}</button>'
-
     page = HTML_HEADER.format(
         title=f'{site_name}',
         suffix='',
@@ -427,17 +415,13 @@ def generate_homepage(config, index_data, css_rel, js_rel):
     </div>
   </div>
 
-  <div class="tag-filter">
-    {tags_html}
-  </div>
-
   <div class="sector-grid">
     {cards_html}
   </div>
 </main>
 '''
     page += FOOTER.format(
-        footer_text=f'© {datetime.now().year} 投资逻辑监控 | 数据每日自动更新',
+        footer_text=f'© {datetime.now().year} 月泽小猫猫的逻辑库 | 数据每日自动更新',
         js_path=js_rel,
     )
 
@@ -624,6 +608,10 @@ args = None  # 全局变量，用于路径引用
 
 
 def main():
+    print('⚠️  注意: 此脚本为 v1 遗留代码，生成的页面格式可能与当前手动维护的首页不一致。')
+    print('    如需生成板块详情页，请手动调用 generate_detail_page() 函数。')
+    print('    当前网站首页请直接在根目录编辑 index.html。\n')
+    
     global args
     parser = argparse.ArgumentParser(description='生成投资监控网站')
     parser.add_argument('--config', default='config.yaml', help='配置文件路径')
