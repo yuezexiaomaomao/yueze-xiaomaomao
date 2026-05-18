@@ -278,36 +278,47 @@
     });
   }
 
-  // --- 搜索功能（支持板块内部信息：股票名/代码、指标名、逻辑文章关键词） ---
+  // --- 搜索功能（支持报告卡片和板块卡片） ---
   function initSearch() {
     var input = $('.search-input');
     if (!input) return;
 
     input.addEventListener('input', function () {
       var query = this.value.trim().toLowerCase();
+
+      // 搜索报告卡片
+      $$('.report-card').forEach(function (card) {
+        if (!query) { card.style.display = ''; return; }
+        var title = ($('.report-card-title', card) || {}).textContent || '';
+        var desc = ($('.report-card-desc', card) || {}).textContent || '';
+        var tags = $$('.r-tag', card).map(function (el) { return el.textContent; }).join(' ');
+        var allText = title + ' ' + desc + ' ' + tags;
+        card.style.display = allText.toLowerCase().indexOf(query) !== -1 ? '' : 'none';
+      });
+
+      // 搜索板块卡片（原有逻辑）
       $$('.sector-card').forEach(function (card) {
-        // 优先使用 data-search-text（包含完整可搜索内容）
         var searchText = card.dataset.searchText || '';
-        // 兜底：从卡片可见元素取文本
         var name = ($('.card-title', card) || {}).textContent || '';
         var desc = ($('.card-desc', card) || {}).textContent || '';
         var tag = ($('.card-tag', card) || {}).textContent || '';
         var chips = $$('.stock-chip', card).map(function (el) { return el.textContent; }).join(' ');
         var allText = searchText + ' ' + name + ' ' + desc + ' ' + tag + ' ' + chips;
-
         var match = !query || allText.toLowerCase().indexOf(query) !== -1;
         card.style.display = match ? '' : 'none';
       });
 
-      var visible = $$('.sector-card').filter(function (c) { return c.style.display !== 'none'; });
+      // 隐藏/显示无结果提示
+      var visibleReports = $$('.report-card').filter(function (c) { return c.style.display !== 'none'; });
+      var visibleSectors = $$('.sector-card').filter(function (c) { return c.style.display !== 'none'; });
       var noResult = $('.no-results');
-      if (!noResult && query && visible.length === 0) {
+      if (!noResult && query && visibleReports.length === 0 && visibleSectors.length === 0) {
         noResult = document.createElement('div');
         noResult.className = 'no-results';
-        noResult.innerHTML = '<div class="emoji">\uD83D\uDD0D</div><p>\u6CA1\u6709\u627E\u5230\u5339\u914D\u7684\u677F\u5757</p><p style="font-size:13px;color:var(--text-muted);margin-top:4px">\u8BD5\u8BD5\u641C\u80A1\u7968\u4EE3\u7801\u3001\u6307\u6807\u540D\u79F0\u6216\u903B\u8F91\u5173\u952E\u8BCD</p>';
-        var grid = $('.sector-grid');
-        if (grid) grid.appendChild(noResult);
-      } else if (noResult && (visible.length > 0 || !query)) {
+        noResult.innerHTML = '<div class="emoji">\uD83D\uDD0D</div><p>\u6CA1\u6709\u627E\u5230\u5339\u914D\u7684\u5185\u5BB9</p><p style="font-size:13px;color:var(--text-muted);margin-top:4px">\u8BD5\u8BD5\u641C\u62A5\u544A\u6807\u9898\u3001\u80A1\u7968\u4EE3\u7801\u6216\u5173\u952E\u8BCD</p>';
+        var container = $('.report-list') || $('.sector-grid');
+        if (container) container.appendChild(noResult);
+      } else if (noResult && (visibleReports.length > 0 || visibleSectors.length > 0 || !query)) {
         noResult.remove();
       }
     });
@@ -461,6 +472,219 @@
     });
   }
 
+  // ============================================
+  // 板块数据看板 — 加载各板块 JSON 并渲染
+  // ============================================
+
+  /** 信号标签样式 */
+  function signalBadge(signal, message) {
+    var cls = 'sd-signal-' + (signal || 'warning');
+    return '<span class="sd-signal ' + cls + '">' + (message || '\U0001F7E1 数据不足') + '</span>';
+  }
+
+  /** 指标信号颜色 */
+  function signalColor(signal) {
+    if (signal === 'good') return 'var(--up-color)';
+    if (signal === 'bad') return 'var(--down-color)';
+    return 'var(--text-muted)';
+  }
+
+  /** 格式化指标值 */
+  function fmtIndicator(ind) {
+    if (ind.current_value == null) return '--';
+    var v = ind.current_value;
+    var key = ind.key || '';
+    if (key === 'pe_ttm' || key === 'pb') return v.toFixed(2);
+    return v.toFixed(2) + '%';
+  }
+
+  /** 加载并渲染板块数据看板 */
+  function loadSectorDashboard() {
+    var container = $('#sectorDashboardContent');
+    if (!container) return;
+
+    // 加载 index.json 获取板块列表
+    fetch(DATA_BASE + 'index.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (idx) {
+        var sectors = idx.sectors || [];
+        if (sectors.length === 0) {
+          container.innerHTML = '<div style="color:var(--text-muted)">暂无板块数据</div>';
+          return;
+        }
+        // 逐个加载板块数据
+        var promises = sectors.map(function (sec) {
+          return fetch(DATA_BASE + sec.id + '.json', { cache: 'no-store' })
+            .then(function (r) { return r.json(); })
+            .then(function (data) { return data; })
+            .catch(function () { return null; });
+        });
+        return Promise.all(promises);
+      })
+      .then(function (allData) {
+        if (!allData) return;
+        var html = '';
+        allData.forEach(function (data) {
+          if (!data) return;
+          html += renderSectorCard(data);
+        });
+        container.innerHTML = html || '<div style="color:var(--text-muted)">暂无板块数据</div>';
+      })
+      .catch(function () {
+        container.innerHTML = '<div style="color:var(--text-muted)">加载板块数据失败</div>';
+      });
+  }
+
+  /** 渲染单个板块卡片 */
+  function renderSectorCard(data) {
+    var stocks = data.stocks || [];
+    var indicators = data.indicators || [];
+
+    // 股票表格行
+    var stockRows = '';
+    stocks.forEach(function (s) {
+      var chgColor = s.change_pct > 0 ? 'color:var(--up-color)' : (s.change_pct < 0 ? 'color:var(--down-color)' : '');
+      var chgPrefix = s.change_pct >= 0 ? '+' : '';
+      var peStr = s.pe_ttm != null ? s.pe_ttm.toFixed(2) : '--';
+      var pbStr = s.pb != null ? s.pb.toFixed(2) : '--';
+      stockRows += '<tr>' +
+        '<td><b>' + s.name + '</b></td>' +
+        '<td style="font-family:monospace;font-size:12px;color:var(--text-muted)">' + s.code + '</td>' +
+        '<td style="font-weight:600;font-variant-numeric:tabular-nums">' + (s.price || 0).toFixed(2) + '</td>' +
+        '<td style="' + chgColor + ';font-weight:600;font-variant-numeric:tabular-nums">' + chgPrefix + (s.change_pct || 0).toFixed(2) + '%</td>' +
+        '<td style="font-variant-numeric:tabular-nums">' + peStr + '</td>' +
+        '<td style="font-variant-numeric:tabular-nums">' + pbStr + '</td>' +
+        '</tr>';
+    });
+
+    // 指标小卡片
+    var indHtml = '';
+    indicators.forEach(function (ind) {
+      var color = signalColor(ind.signal);
+      indHtml += '<div class="sd-indicator">' +
+        '<div class="sd-ind-label">' + ind.name + '</div>' +
+        '<div class="sd-ind-value" style="color:' + color + '">' + fmtIndicator(ind) + '</div>' +
+      '</div>';
+    });
+
+    return '<div class="sd-card">' +
+      '<div class="sd-header">' +
+        '<div class="sd-title">' + (data.name || '') + '</div>' +
+        signalBadge(data.overall_signal, data.signal_message) +
+      '</div>' +
+      '<div class="sd-indicators">' + indHtml + '</div>' +
+      '<div class="sd-table-wrap"><table>' +
+        '<thead><tr>' +
+          '<th>标的</th><th>代码</th><th>最新价</th><th>涨跌幅</th><th>PE</th><th>PB</th>' +
+        '</tr></thead>' +
+        '<tbody>' + stockRows + '</tbody>' +
+      '</table></div>' +
+    '</div>';
+  }
+
+  // ============================================
+  // 预测仪表盘 — 加载 today.json 并渲染
+  // ============================================
+
+  var DASHBOARD_BASE = (function () {
+    var path = window.location.pathname;
+    if (path.indexOf('/reports/') !== -1) {
+      return '../dashboards/';
+    }
+    return 'dashboards/';
+  })();
+
+  /** 加载并渲染预测仪表盘 */
+  function loadPredictionDashboard() {
+    var grid = $('#predictionGrid');
+    if (!grid) return;
+
+    fetch(DASHBOARD_BASE + 'today.json', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) { renderPredictionCards(grid, data); })
+      .catch(function () {
+        grid.innerHTML = '<div class="loading-predictions" style="color:var(--text-muted)">暂无预测数据</div>';
+      });
+  }
+
+  /** 计算 target_date 距今天数 */
+  function daysUntil(isoDate) {
+    var now = new Date();
+    var target = new Date(isoDate);
+    var diff = target.getTime() - now.getTime();
+    return Math.max(0, Math.ceil(diff / (1000 * 60 * 60 * 24)));
+  }
+
+  /** 根据偏离度返回色标和标签 */
+  function deviationStyle(deviation) {
+    if (deviation === null || deviation === undefined) return { cls: 'flat', label: '数据不足' };
+    var abs = Math.abs(deviation);
+    if (deviation < -20) return { cls: 'overbought', label: deviation.toFixed(1) + '% 高估' };
+    if (deviation < -10) return { cls: 'slightly-over', label: deviation.toFixed(1) + '% 偏高' };
+    if (deviation > 20) return { cls: 'oversold', label: '+' + deviation.toFixed(1) + '% 低估' };
+    if (deviation > 10) return { cls: 'slightly-under', label: '+' + deviation.toFixed(1) + '% 偏低' };
+    return { cls: 'fair', label: deviation.toFixed(1) + '% 接近' };
+  }
+
+  /** 风险状态图标 */
+  function riskIcon(status) {
+    if (status === 'escalated') return '🟡';
+    if (status === 'de-escalated') return '🔽';
+    return '🟢';
+  }
+
+  /** 渲染预测卡片 */
+  function renderPredictionCards(grid, predictions) {
+    if (!predictions || predictions.length === 0) {
+      grid.innerHTML = '<div class="loading-predictions" style="color:var(--text-muted)">暂无预测数据</div>';
+      return;
+    }
+
+    var html = '';
+    predictions.forEach(function (p) {
+      var ds = deviationStyle(p.deviation_pct);
+      var days = daysUntil(p.target_date);
+      var riskyCount = (p.risks || []).filter(function (r) { return r.status === 'escalated'; }).length;
+
+      html += '<div class="pred-card">' +
+        '<div class="pred-header">' +
+          '<div class="pred-ticker">' +
+            '<span class="pred-name">' + (p.name || p.ticker) + '</span>' +
+            '<span class="pred-code">' + p.ticker + '</span>' +
+          '</div>' +
+          '<div class="pred-days">' + days + '天后到期</div>' +
+        '</div>' +
+
+        '<div class="pred-prices">' +
+          '<div class="pred-price-block">' +
+            '<div class="pred-price-label">目标价</div>' +
+            '<div class="pred-price-target">¥' + p.target_price.toFixed(2) + '</div>' +
+            '<div class="pred-date">' + p.target_date + '</div>' +
+          '</div>' +
+          '<div class="pred-price-block">' +
+            '<div class="pred-price-label">当前价</div>' +
+            '<div class="pred-price-current">¥' + (p.current_price ? p.current_price.toFixed(2) : '--') + '</div>' +
+          '</div>' +
+          '<div class="pred-deviation ' + ds.cls + '">' + ds.label + '</div>' +
+        '</div>' +
+
+        '<div class="pred-risks">' +
+          (p.risks || []).map(function (r) {
+            var noteHtml = r.note ? '<span class="risk-note"> — ' + r.note + '</span>' : '';
+            var escalatedMark = r.status === 'escalated' ? ' <span class="risk-escalated-badge">已升级</span>' : '';
+            return '<div class="risk-item risk-' + r.status + '">' +
+              riskIcon(r.status) + ' ' + r.label + escalatedMark + noteHtml +
+            '</div>';
+          }).join('') +
+        '</div>' +
+
+        (riskyCount > 0 ? '<div class="pred-alert">⚠️ ' + riskyCount + ' 项风险已升级，请关注</div>' : '') +
+      '</div>';
+    });
+
+    grid.innerHTML = html;
+  }
+
   // --- 分享功能 ---
   function initShare() {
     var shareBtn = $('#shareBtn');
@@ -489,6 +713,10 @@
     initCardClicks();
     // 动态加载 JSON 数据
     loadDashboardData();
+    // 加载板块数据看板
+    loadSectorDashboard();
+    // 加载预测仪表盘
+    loadPredictionDashboard();
   });
 
 })();

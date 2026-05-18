@@ -18,7 +18,7 @@
     <div class="nav-right">
       <div class="search-wrapper">
         <span class="search-icon">🔍</span>
-        <input type="text" class="search-input" placeholder="搜索板块、股票..." />
+        <input type="text" class="search-input" placeholder="搜索报告、板块、股票..." />
       </div>
       <button class="theme-toggle" title="切换主题">🌙</button>
     </div>
@@ -35,12 +35,49 @@
     </div>
   </div>
 
+  <!-- 板块数据看板（动态加载 JSON） -->
+  <div class="data-dashboard" id="sector-dashboard">
+    <div class="section-label"><span class="icon">📊</span> 板块数据看板</div>
+    <div id="sectorDashboardContent" class="sector-dashboard-content">
+      <div class="loading-predictions">加载板块数据中...</div>
+    </div>
+  </div>
+
+  <!-- 预测仪表盘 -->
+  <div class="data-dashboard" id="predictions">
+    <div class="section-label"><span class="icon">🎯</span> 预测仪表盘</div>
+    <div class="prediction-grid" id="predictionGrid">
+      <div class="loading-predictions">加载预测数据中...</div>
+    </div>
+  </div>
+
   <!-- 研究报告（按时间倒序，序号越大越新） -->
   <div class="data-dashboard" id="reports">
     <div class="section-label"><span class="icon">📋</span> 研究报告</div>
     <div class="report-list">
 
-      <!-- #0002 核能深度分析（最新） -->
+      <!-- #0003 核能五年预测（最新） -->
+      <a href="reports/nuclear-003/index.html" class="report-card">
+        <div class="report-card-left">
+          <span class="report-num">#0003</span>
+        </div>
+        <div class="report-card-body">
+          <h3 class="report-card-title">核能产业链五年利润与股价预测（2026–2030）</h3>
+          <p class="report-card-desc">五大核心标的财务数据汇总、五年利润模型、估值分析与股价空间测算。首选中国核电，潜在涨幅+80%。</p>
+          <div class="report-card-tags">
+            <span class="r-tag">投资标的</span>
+            <span class="r-tag">核能</span>
+            <span class="r-tag">利润预测</span>
+            <span class="r-tag">估值分析</span>
+          </div>
+        </div>
+        <div class="report-card-right">
+          <span class="report-date">2026-05-17</span>
+          <span class="report-arrow">→</span>
+        </div>
+      </a>
+
+      <!-- #0002 核能深度分析 -->
       <a href="reports/nuclear-002/index.html" class="report-card">
         <div class="report-card-left">
           <span class="report-num">#0002</span>
@@ -82,14 +119,11 @@
     </div>
   </div>
 
-  <div class="sector-grid">
-    <!-- 板块卡片将在此动态生成，或通过后台添加 -->
-  </div>
 </main>
 
 <footer class="footer">
-  <p>© 2026 月泽小猫猫的逻辑库 | 数据每日自动更新</p>
-  <p style="margin-top:6px">数据来源：AKShare / 东方财富 | 仅供参考，不构成投资建议</p>
+  <p>&copy; 2026 月泽小猫猫的逻辑库 | 数据每日自动更新</p>
+  <p style="margin-top:6px">数据来源：AKShare / 百度估值 / 同花顺 | 仅供参考，不构成投资建议</p>
 </footer>
 
 <script src="app.js"></script>

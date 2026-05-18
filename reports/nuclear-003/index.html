@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>核能产业链投资研究报告 — A股主板5年利润与股价预测</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card-border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-muted: #9ca3af;
+    --red: #ef4444;
+    --green: #22c55e;
+    --blue: #3b82f6;
+    --yellow: #f59e0b;
+    --purple: #a855f7;
+    --orange: #f97316;
+    --cyan: #06b6d4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 2em;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .header .subtitle { color: var(--text-muted); font-size: 0.95em; }
+  .header .date { color: var(--text-muted); font-size: 0.85em; margin-top: 8px; }
+  .section { margin-bottom: 36px; }
+  .section h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 4px solid var(--yellow);
+    color: var(--text);
+  }
+  .section h3 {
+    font-size: 1.15em;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    color: var(--yellow);
+  }
+  .section p { margin-bottom: 12px; color: var(--text); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .metric-card .label { font-size: 0.85em; color: var(--text-muted); margin-bottom: 6px; }
+  .metric-card .value { font-size: 1.6em; font-weight: 700; }
+  .metric-card .sub { font-size: 0.8em; color: var(--text-muted); margin-top: 4px; }
+  .red { color: var(--red); }
+  .green { color: var(--green); }
+  .blue { color: var(--blue); }
+  .yellow { color: var(--yellow); }
+  .purple { color: var(--purple); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.92em;
+  }
+  thead th {
+    background: #252836;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--yellow);
+    border-bottom: 2px solid var(--card-border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #1f2231;
+  }
+  tbody tr:hover { background: rgba(255,255,255,0.03); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+  .tag-up { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag-down { background: rgba(34,197,94,0.15); color: var(--green); }
+  .tag-neutral { background: rgba(156,163,175,0.15); color: var(--text-muted); }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(249,115,22,0.05));
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .highlight-box strong { color: var(--yellow); }
+
+  .logic-chain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+  .logic-step {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 0.9em;
+  }
+  .logic-arrow { color: var(--yellow); font-size: 1.3em; }
+
+  .rating-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+  }
+  .rating-label { width: 80px; text-align: right; font-size: 0.9em; }
+  .rating-track { flex: 1; height: 8px; background: #252836; border-radius: 4px; overflow: hidden; }
+  .rating-fill { height: 100%; border-radius: 4px; }
+  .rating-val { width: 50px; font-size: 0.9em; font-weight: 600; }
+
+  .disclaimer {
+    background: #252836;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 0.82em;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .disclaimer strong { color: var(--red); }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    .header h1 { font-size: 1.4em; }
+    table { font-size: 0.8em; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>核能产业链投资研究报告</h1>
+  <div class="subtitle">A股主板标的 · 五年利润预测与估值分析</div>
+  <div class="date">2026年5月17日 · 预测区间 2026–2030</div>
+</div>
+
+<!-- ===================== 第一部分：投资逻辑 ===================== -->
+<div class="section">
+  <h2>一、为什么现在要投核能？</h2>
+
+  <h3>1.1 核心逻辑链</h3>
+  <div class="logic-chain">
+    <div class="logic-step">双碳目标<br><span style="color:var(--text-muted)">2030碳达峰<br>2060碳中和</span></div>
+    <div class="logic-arrow">→</div>
+    <div class="logic-step">电力需求<br><span style="color:var(--text-muted)">AI/数据中心<br>新能源车</span></div>
+    <div class="logic-arrow">→</div>
+    <div class="logic-step">基荷电力缺口<br><span style="color:var(--text-muted)">风光不稳定<br>煤电退出</span></div>
+    <div class="logic-arrow">→</div>
+    <div class="logic-step">核电加速扩张<br><span style="color:var(--text-muted)">年核准10+台<br>投资8000亿+</span></div>
+  </div>
+
+  <h3>1.2 宏观数据支撑</h3>
+  <div class="card-grid">
+    <div class="metric-card">
+      <div class="label">2022–2025年核准机组</div>
+      <div class="value red">41台</div>
+      <div class="sub">连续4年年均核准10+台</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">单机投资额</div>
+      <div class="value yellow">~200亿</div>
+      <div class="sub">41台总投资超8000亿</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">在建核电机组（全球占比）</div>
+      <div class="value blue">36台 / 50%+</div>
+      <div class="sub">连续18年全球第一</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">2026年底在运机组预期</div>
+      <div class="value green">70台</div>
+      <div class="sub">发电量占比将突破5%</div>
+    </div>
+  </div>
+
+  <h3>1.3 关键时间节点</h3>
+  <table>
+    <thead><tr><th>时间</th><th>事件</th><th>影响</th></tr></thead>
+    <tbody>
+      <tr><td>2026–2027</td><td>国产核电投产高峰</td><td>运营商发电量/收入显著增长</td></tr>
+      <tr><td>2026–2030（十五五）</td><td>预计年均核准8台左右</td><td>设备商订单持续饱满</td></tr>
+      <tr><td>2030</td><td>在运装机预计超1.1亿千瓦</td><td>全球第一，产业链利润兑现</td></tr>
+      <tr><td>2035</td><td>目标装机1.8亿千瓦</td><td>较2025年近乎翻倍</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================== 第二部分：产业链全景 ===================== -->
+<div class="section">
+  <h2>二、核能产业链全景与A股主板标的</h2>
+
+  <h3>2.1 产业链结构</h3>
+  <table>
+    <thead><tr><th>环节</th><th>核心业务</th><th>代表标的</th><th>代码</th><th>竞争格局</th></tr></thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><strong>上游</strong><br>核燃料</td>
+        <td>天然铀开采/贸易</td>
+        <td>中核国际</td>
+        <td>港股</td>
+        <td class="tag tag-neutral">非主板</td>
+      </tr>
+      <tr>
+        <td>核燃料加工</td>
+        <td>中核科技</td>
+        <td>000777</td>
+        <td>阀门为主，燃料加工垄断在中核集团</td>
+      </tr>
+      <tr>
+        <td rowspan="3"><strong>中游</strong><br>设备制造</td>
+        <td>核岛/常规岛主设备</td>
+        <td>东方电气</td>
+        <td>600875</td>
+        <td>国内三大主设备商之一</td>
+      </tr>
+      <tr>
+        <td>核岛/常规岛/核聚变装备</td>
+        <td>上海电气</td>
+        <td>601727</td>
+        <td>核电装备龙头，技术全链覆盖</td>
+      </tr>
+      <tr>
+        <td>核级阀门/管道</td>
+        <td>中核科技</td>
+        <td>000777</td>
+        <td>核电阀门核心供应商</td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>中游</strong><br>工程建设</td>
+        <td>核电站工程建造</td>
+        <td>中国核建</td>
+        <td>601611</td>
+        <td>国内核电工程绝对垄断</td>
+      </tr>
+      <tr>
+        <td>核电工程（中广核系）</td>
+        <td>中国核建（参建）</td>
+        <td>601611</td>
+        <td>覆盖全部在建核电站</td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>下游</strong><br>核电运营</td>
+        <td>核电发电运营（中核系）</td>
+        <td>中国核电</td>
+        <td>601985</td>
+        <td>国内第二大核电运营商</td>
+      </tr>
+      <tr>
+        <td>核电发电运营（中广核系）</td>
+        <td>中国广核</td>
+        <td>003816</td>
+        <td>国内最大核电运营商</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <strong>关键判断：</strong>上游铀矿环节A股主板几乎没有纯标的（中核集团铀矿资产未上市）；核心投资机会集中在<strong>中游设备制造</strong>和<strong>下游核电运营</strong>两个环节。中游受益于"在建→投产"周期（现在到2030年是订单释放高峰），下游受益于"投产→发电"周期（2026起进入新机组密集商运期）。
+  </div>
+</div>
+
+<!-- ===================== 第三部分：核心标的分析 ===================== -->
+<div class="section">
+  <h2>三、五大核心标的：当前基本面与估值</h2>
+
+  <h3>3.1 当前财务数据汇总（2025年报）</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>标的</th><th>2025营收(亿)</th><th>营收增速</th><th>2025净利润(亿)</th><th>净利增速</th><th>毛利率</th><th>ROE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>中国核电</strong><br>601985</td>
+        <td>820.75</td>
+        <td><span class="tag tag-up">+6.2%</span></td>
+        <td>93.04</td>
+        <td><span class="tag tag-up">+6.0%</span></td>
+        <td>41.3%</td>
+        <td>7.8%</td>
+      </tr>
+      <tr>
+        <td><strong>中国广核</strong><br>003816</td>
+        <td>756.97</td>
+        <td><span class="tag tag-down">-4.1%</span></td>
+        <td>97.65</td>
+        <td><span class="tag tag-down">-9.9%</span></td>
+        <td>~40%</td>
+        <td>~7.5%</td>
+      </tr>
+      <tr>
+        <td><strong>东方电气</strong><br>600875</td>
+        <td>786.15</td>
+        <td><span class="tag tag-up">+12.8%</span></td>
+        <td>38.31</td>
+        <td><span class="tag tag-up">+31.1%</span></td>
+        <td>17.0%</td>
+        <td>~12%</td>
+      </tr>
+      <tr>
+        <td><strong>上海电气</strong><br>601727</td>
+        <td>1266.79</td>
+        <td><span class="tag tag-up">+9.0%</span></td>
+        <td>12.06</td>
+        <td><span class="tag tag-up">+60.3%</span></td>
+        <td>~15%</td>
+        <td>~1%</td>
+      </tr>
+      <tr>
+        <td><strong>中国核建</strong><br>601611</td>
+        <td>1019.16</td>
+        <td><span class="tag tag-down">-10.2%</span></td>
+        <td>13.19</td>
+        <td><span class="tag tag-down">-36.1%</span></td>
+        <td>~8%</td>
+        <td>~5%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 当前估值与市场定价（2026年5月中旬）</h3>
+  <table>
+    <thead>
+      <tr><th>标的</th><th>股价(元)</th><th>总市值(亿)</th><th>PE(TTM)</th><th>PB</th><th>2026Q1业绩趋势</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>中国核电</strong></td>
+        <td>~9.3</td>
+        <td>~1900</td>
+        <td>~20x</td>
+        <td>~0.8x</td>
+        <td>Q1净利20.6亿，电价下调短期承压</td>
+      </tr>
+      <tr>
+        <td><strong>中国广核</strong></td>
+        <td>~4.8</td>
+        <td>~2410</td>
+        <td>~24x</td>
+        <td>~1.4x</td>
+        <td>2025年净利下滑，电价新政改善预期</td>
+      </tr>
+      <tr>
+        <td><strong>东方电气</strong></td>
+        <td>~39</td>
+        <td>~1320</td>
+        <td>~31x</td>
+        <td>~2.5x</td>
+        <td>Q1净利15.85亿，同比+37%，超预期</td>
+      </tr>
+      <tr>
+        <td><strong>上海电气</strong></td>
+        <td>~8.8</td>
+        <td>~1370</td>
+        <td>~110x</td>
+        <td>~1.8x</td>
+        <td>2025年扣非扭亏，核电+机器人催化</td>
+      </tr>
+      <tr>
+        <td><strong>中国核建</strong></td>
+        <td>~13.0</td>
+        <td>~392</td>
+        <td>~28x</td>
+        <td>~1.4x</td>
+        <td>核电工程板块增长17%，工民建拖累</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================== 第四部分：五年利润预测 ===================== -->
+<div class="section">
+  <h2>四、五年利润预测（2026–2030）</h2>
+
+  <h3>4.1 预测方法说明</h3>
+  <p>基于以下假设进行利润推算：</p>
+  <div class="card" style="font-size:0.9em;">
+    <ul style="padding-left:20px;">
+      <li><strong>装机增速假设</strong>：2026–2030年每年新商运5–8台机组，总装机从~6200万千瓦增至~11000万千瓦</li>
+      <li><strong>设备投资假设</strong>：十五五期间年均核准8台，单台投资200亿，年均设备订单1600亿</li>
+      <li><strong>电价假设</strong>：核电市场化交易电价略有下行但趋于稳定，2027年后企稳</li>
+      <li><strong>毛利率假设</strong>：运营商维持40%左右，设备商随规模效应小幅改善</li>
+    </ul>
+  </div>
+
+  <h3>4.2 中国核电（601985）—— 利润预测</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>年份</th><th>在运机组(台)</th><th>营收(亿)</th><th>净利润(亿)</th><th>净利增速</th><th>对应EPS</th></tr></thead>
+      <tbody>
+        <tr><td>2025(实际)</td><td>~32</td><td>820.75</td><td>93.04</td><td>+6.0%</td><td>0.45</td></tr>
+        <tr><td><strong>2026E</strong></td><td>~36</td><td>870</td><td>90</td><td>-3.2%</td><td>0.43</td></tr>
+        <tr><td><strong>2027E</strong></td><td>~42</td><td>960</td><td>105</td><td>+16.7%</td><td>0.51</td></tr>
+        <tr><td><strong>2028E</strong></td><td>~50</td><td>1100</td><td>125</td><td>+19.0%</td><td>0.60</td></tr>
+        <tr><td><strong>2029E</strong></td><td>~58</td><td>1260</td><td>148</td><td>+18.4%</td><td>0.71</td></tr>
+        <tr><td><strong>2030E</strong></td><td>~66</td><td>1440</td><td>175</td><td>+18.2%</td><td>0.84</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:0.9em;color:var(--text-muted);">
+      <strong>核心逻辑</strong>：2026年受电价市场化改革短期影响利润小幅下滑，但2027起新机组密集投产带动发电量快速增长，2027–2030年利润CAGR约18%。
+    </p>
+  </div>
+
+  <h3>4.3 中国广核（003816）—— 利润预测</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>年份</th><th>在运机组(台)</th><th>营收(亿)</th><th>净利润(亿)</th><th>净利增速</th><th>对应EPS</th></tr></thead>
+      <tbody>
+        <tr><td>2025(实际)</td><td>28</td><td>756.97</td><td>97.65</td><td>-9.9%</td><td>0.19</td></tr>
+        <tr><td><strong>2026E</strong></td><td>~30</td><td>780</td><td>95</td><td>-2.7%</td><td>0.19</td></tr>
+        <tr><td><strong>2027E</strong></td><td>~34</td><td>860</td><td>110</td><td>+15.8%</td><td>0.22</td></tr>
+        <tr><td><strong>2028E</strong></td><td>~38</td><td>970</td><td>128</td><td>+16.4%</td><td>0.25</td></tr>
+        <tr><td><strong>2029E</strong></td><td>~42</td><td>1080</td><td>146</td><td>+14.1%</td><td>0.29</td></tr>
+        <tr><td><strong>2030E</strong></td><td>~46</td><td>1200</td><td>165</td><td>+13.0%</td><td>0.33</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:0.9em;color:var(--text-muted);">
+      <strong>核心逻辑</strong>：中广核机组基数更大但增速略慢于中核，2025年利润下滑主要因市场化电价调整，2027年起恢复双位数增长。五年利润CAGR约11%。
+    </p>
+  </div>
+
+  <h3>4.4 东方电气（600875）—— 利润预测</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>年份</th><th>营收(亿)</th><th>净利润(亿)</th><th>净利增速</th><th>在手订单(亿)</th><th>对应EPS</th></tr></thead>
+      <tbody>
+        <tr><td>2025(实际)</td><td>786.15</td><td>38.31</td><td>+31.1%</td><td>1850+</td><td>1.15</td></tr>
+        <tr><td><strong>2026E</strong></td><td>900</td><td>48</td><td>+25.3%</td><td>~2000</td><td>1.44</td></tr>
+        <tr><td><strong>2027E</strong></td><td>1020</td><td>58</td><td>+20.8%</td><td>~2100</td><td>1.74</td></tr>
+        <tr><td><strong>2028E</strong></td><td>1100</td><td>65</td><td>+12.1%</td><td>~2000</td><td>1.95</td></tr>
+        <tr><td><strong>2029E</strong></td><td>1150</td><td>70</td><td>+7.7%</td><td>~1900</td><td>2.10</td></tr>
+        <tr><td><strong>2030E</strong></td><td>1200</td><td>76</td><td>+8.6%</td><td>~1900</td><td>2.28</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:0.9em;color:var(--text-muted);">
+      <strong>核心逻辑</strong>：在手订单1850亿+（约2.4倍年营收），核电+水电+海外订单共振。2026–2027是订单→收入的高峰转化期，利润弹性大。但2028年后核准放缓可能影响增速。五年利润CAGR约15%。
+    </p>
+  </div>
+
+  <h3>4.5 上海电气（601727）—— 利润预测</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>年份</th><th>营收(亿)</th><th>净利润(亿)</th><th>净利增速</th><th>对应EPS</th></tr></thead>
+      <tbody>
+        <tr><td>2025(实际)</td><td>1266.79</td><td>12.06</td><td>+60.3%</td><td>0.078</td></tr>
+        <tr><td><strong>2026E</strong></td><td>1400</td><td>20</td><td>+65.8%</td><td>0.13</td></tr>
+        <tr><td><strong>2027E</strong></td><td>1550</td><td>30</td><td>+50.0%</td><td>0.19</td></tr>
+        <tr><td><strong>2028E</strong></td><td>1650</td><td>38</td><td>+26.7%</td><td>0.24</td></tr>
+        <tr><td><strong>2029E</strong></td><td>1750</td><td>45</td><td>+18.4%</td><td>0.29</td></tr>
+        <tr><td><strong>2030E</strong></td><td>1850</td><td>52</td><td>+15.6%</td><td>0.33</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:0.9em;color:var(--text-muted);">
+      <strong>核心逻辑</strong>：上海电气2025年扣非刚扭亏（仅2亿），基数极低，增长弹性最大。核电装备全链覆盖+核聚变布局+机器人业务是新增长极。但需注意当前PE极高（~110x），市场已部分price in。五年利润CAGR约34%（基数效应）。
+    </p>
+  </div>
+
+  <h3>4.6 中国核建（601611）—— 利润预测</h3>
+  <div class="card">
+    <table>
+      <thead><tr><th>年份</th><th>营收(亿)</th><th>净利润(亿)</th><th>净利增速</th><th>核电工程收入(亿)</th><th>对应EPS</th></tr></thead>
+      <tbody>
+        <tr><td>2025(实际)</td><td>1019.16</td><td>13.19</td><td>-36.1%</td><td>376.8</td><td>0.44</td></tr>
+        <tr><td><strong>2026E</strong></td><td>980</td><td>15</td><td>+13.7%</td><td>430</td><td>0.50</td></tr>
+        <tr><td><strong>2027E</strong></td><td>1050</td><td>18</td><td>+20.0%</td><td>500</td><td>0.60</td></tr>
+        <tr><td><strong>2028E</strong></td><td>1120</td><td>22</td><td>+22.2%</td><td>560</td><td>0.73</td></tr>
+        <tr><td><strong>2029E</strong></td><td>1180</td><td>25</td><td>+13.6%</td><td>600</td><td>0.83</td></tr>
+        <tr><td><strong>2030E</strong></td><td>1200</td><td>27</td><td>+8.0%</td><td>580</td><td>0.90</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:0.9em;color:var(--text-muted);">
+      <strong>核心逻辑</strong>：核电工程板块增长强劲（+17%），但工民建业务大幅拖累整体营收。随着工民建剥离/收缩，核电占比提升将改善利润率。十五五核电工程高峰期利润弹性可期。五年CAGR约15%。
+    </p>
+  </div>
+</div>
+
+<!-- ===================== 第五部分：股价空间预测 ===================== -->
+<div class="section">
+  <h2>五、五年股价空间预测</h2>
+
+  <h3>5.1 估值假设</h3>
+  <table>
+    <thead><tr><th>标的</th><th>当前PE</th><th>合理PE中枢</th><th>假设依据</th></tr></thead>
+    <tbody>
+      <tr><td>中国核电</td><td>~20x</td><td>18–22x</td><td>电力公用事业属性，增长确定性高，全球可比公司15–25x</td></tr>
+      <tr><td>中国广核</td><td>~24x</td><td>18–22x</td><td>同上，但2025年利润下滑导致PE偏高</td></tr>
+      <tr><td>东方电气</td><td>~31x</td><td>18–22x</td><td>设备制造周期性较强，订单高峰期可给高PE，但高峰后回落</td></tr>
+      <tr><td>上海电气</td><td>~110x</td><td>25–35x</td><td>当前PE极高因利润基数低，正常化后估值回落</td></tr>
+      <tr><td>中国核建</td><td>~28x</td><td>15–18x</td><td>建筑工程属性，利润率低但成长性好</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 股价空间测算</h3>
+  <table>
+    <thead><tr><th>标的</th><th>当前价</th><th>2030E EPS</th><th>合理PE</th><th>2030目标价</th><th>潜在涨幅</th><th>评级</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>中国核电</strong></td>
+        <td>9.3</td>
+        <td>0.84</td>
+        <td>20x</td>
+        <td><strong class="red">16.8</strong></td>
+        <td><span class="tag tag-up">+81%</span></td>
+        <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>中国广核</strong></td>
+        <td>4.8</td>
+        <td>0.33</td>
+        <td>20x</td>
+        <td><strong class="red">6.6</strong></td>
+        <td><span class="tag tag-up">+38%</span></td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>东方电气</strong></td>
+        <td>39</td>
+        <td>2.28</td>
+        <td>18x</td>
+        <td><strong class="red">41.0</strong></td>
+        <td><span class="tag tag-up">+5%</span></td>
+        <td>⭐⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>上海电气</strong></td>
+        <td>8.8</td>
+        <td>0.33</td>
+        <td>30x</td>
+        <td><strong class="red">9.9</strong></td>
+        <td><span class="tag tag-up">+13%</span></td>
+        <td>⭐⭐</td>
+      </tr>
+      <tr>
+        <td><strong>中国核建</strong></td>
+        <td>13.0</td>
+        <td>0.90</td>
+        <td>16x</td>
+        <td><strong class="red">14.4</strong></td>
+        <td><span class="tag tag-up">+11%</span></td>
+        <td>⭐⭐</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <strong>结论排序（按五年潜在回报）：</strong><br><br>
+    🥇 <strong>中国核电（601985）</strong>—— 首选标的。确定性最高，新机组密集投产期（2027–2030），利润CAGR~18%，当前PE仅20x偏低，合理空间+80%。<br><br>
+    🥈 <strong>中国广核（003816）</strong>—— 稳健之选。全球最大核电运营商，但利润增速略慢，空间+38%。<br><br>
+    🥉 <strong>东方电气（600875）</strong>—— 弹性之选。在手订单饱满，但当前PE已不便宜（31x），需要等回调或利润快速兑现。
+  </div>
+</div>
+
+<!-- ===================== 第六部分：投资评级雷达 ===================== -->
+<div class="section">
+  <h2>六、综合投资评级</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0;">中国核电 601985 — ⭐⭐⭐⭐ 强烈推荐</h3>
+    <div class="rating-bar"><span class="rating-label">确定性</span><div class="rating-track"><div class="rating-fill" style="width:90%;background:var(--red);"></div></div><span class="rating-val red">90</span></div>
+    <div class="rating-bar"><span class="rating-label">成长性</span><div class="rating-track"><div class="rating-fill" style="width:80%;background:var(--orange);"></div></div><span class="rating-val" style="color:var(--orange)">80</span></div>
+    <div class="rating-bar"><span class="rating-label">安全边际</span><div class="rating-track"><div class="rating-fill" style="width:75%;background:var(--yellow);"></div></div><span class="rating-val yellow">75</span></div>
+    <div class="rating-bar"><span class="rating-label">估值吸引力</span><div class="rating-track"><div class="rating-fill" style="width:85%;background:var(--green);"></div></div><span class="rating-val green">85</span></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;">中国广核 003816 — ⭐⭐⭐ 推荐</h3>
+    <div class="rating-bar"><span class="rating-label">确定性</span><div class="rating-track"><div class="rating-fill" style="width:90%;background:var(--red);"></div></div><span class="rating-val red">90</span></div>
+    <div class="rating-bar"><span class="rating-label">成长性</span><div class="rating-track"><div class="rating-fill" style="width:60%;background:var(--orange);"></div></div><span class="rating-val" style="color:var(--orange)">60</span></div>
+    <div class="rating-bar"><span class="rating-label">安全边际</span><div class="rating-track"><div class="rating-fill" style="width:55%;background:var(--yellow);"></div></div><span class="rating-val yellow">55</span></div>
+    <div class="rating-bar"><span class="rating-label">估值吸引力</span><div class="rating-track"><div class="rating-fill" style="width:60%;background:var(--green);"></div></div><span class="rating-val green">60</span></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0;">东方电气 600875 — ⭐⭐⭐ 推荐（等回调）</h3>
+    <div class="rating-bar"><span class="rating-label">确定性</span><div class="rating-track"><div class="rating-fill" style="width:70%;background:var(--red);"></div></div><span class="rating-val red">70</span></div>
+    <div class="rating-bar"><span class="rating-label">成长性</span><div class="rating-track"><div class="rating-fill" style="width:75%;background:var(--orange);"></div></div><span class="rating-val" style="color:var(--orange)">75</span></div>
+    <div class="rating-bar"><span class="rating-label">安全边际</span><div class="rating-track"><div class="rating-fill" style="width:40%;background:var(--yellow);"></div></div><span class="rating-val yellow">40</span></div>
+    <div class="rating-bar"><span class="rating-label">估值吸引力</span><div class="rating-track"><div class="rating-fill" style="width:35%;background:var(--green);"></div></div><span class="rating-val green">35</span></div>
+  </div>
+</div>
+
+<!-- ===================== 第七部分：风险提示 ===================== -->
+<div class="section">
+  <h2>七、风险提示</h2>
+  <div class="card" style="border-left:4px solid var(--red);">
+    <ol style="padding-left:20px;font-size:0.92em;line-height:2;">
+      <li><strong style="color:var(--red)">核电安全事故风险</strong>——任何核安全事故将导致全行业审批停滞、股价暴跌</li>
+      <li><strong style="color:var(--red)">电价政策风险</strong>——电力市场化改革可能进一步压低核电上网电价</li>
+      <li><strong style="color:var(--red)">核准节奏放缓</strong>——若十五五期间年核准量降至5台以下，设备商订单将显著收缩</li>
+      <li><strong style="color:var(--red)">建设工期延误</strong>——核电建设周期5–7年，工期延长影响利润兑现节奏</li>
+      <li><strong style="color:var(--red)">估值预测偏差</strong>——市场情绪、宏观环境、流动性均可能导致估值大幅偏离合理区间</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ===================== 免责声明 ===================== -->
+<div class="disclaimer">
+  <strong>免责声明</strong>：本报告基于公开信息整理分析，仅供研究参考，不构成任何投资建议。股市有风险，投资需谨慎。预测数据基于特定假设，实际情况可能与预测存在重大偏差。作者不对因使用本报告信息而导致的任何投资损失承担责任。
+</div>
+
+</body>
+</html>

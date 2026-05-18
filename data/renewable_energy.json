@@ -1,0 +1,34 @@
+{
+  "sector_id": "renewable_energy",
+  "name": "新能源板块",
+  "tag": "新能源",
+  "description": "关注新能源产业链投资机会（示例，待填充）",
+  "fetched_at": "2026-05-18T13:14:52.801790",
+  "stocks": [],
+  "indicators": [
+    {
+      "name": "PE(TTM)",
+      "key": "pe_ttm",
+      "unit": "",
+      "threshold_high": 25,
+      "threshold_low": 12,
+      "direction": "low_is_better",
+      "current_value": null,
+      "signal": "neutral",
+      "values_from_stocks": []
+    },
+    {
+      "name": "净利润增速(%)",
+      "key": "profit_growth",
+      "unit": "%",
+      "threshold_high": null,
+      "threshold_low": 15,
+      "direction": "high_is_better",
+      "current_value": null,
+      "signal": "neutral",
+      "values_from_stocks": []
+    }
+  ],
+  "overall_signal": "warning",
+  "signal_message": "🟡 部分指标接近临界点"
+}

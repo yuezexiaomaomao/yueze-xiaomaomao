@@ -1,0 +1,1567 @@
+{
+  "sector_id": "nuclear_energy",
+  "name": "核能板块",
+  "tag": "核能",
+  "description": "关注核能产业链相关A股标的的投资机会",
+  "fetched_at": "2026-05-18T19:17:44.657199",
+  "stocks": [
+    {
+      "code": "601985",
+      "name": "中国核电",
+      "price": 9.05,
+      "change_pct": -0.985,
+      "volume": 104214286.0,
+      "amount": 942624849.0,
+      "high": 9.18,
+      "low": 8.99,
+      "open": 9.14,
+      "prev_close": 9.14,
+      "market_cap": 186140000000.0,
+      "pe_ttm": 20.01,
+      "pe_static": null,
+      "pb": 1.58,
+      "profit_growth": 6.0,
+      "roe": 8.21,
+      "ma20": 9.01,
+      "price_vs_ma20": 0.4,
+      "history": [
+        {
+          "date": "2025-11-14",
+          "close": 8.91,
+          "volume": 75698557,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-17",
+          "close": 8.82,
+          "volume": 95518312,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-18",
+          "close": 8.8,
+          "volume": 56826207,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-19",
+          "close": 8.73,
+          "volume": 93880302,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-20",
+          "close": 8.75,
+          "volume": 64201379,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-21",
+          "close": 8.66,
+          "volume": 93749217,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-24",
+          "close": 8.71,
+          "volume": 60971998,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-25",
+          "close": 8.7,
+          "volume": 65293770,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-26",
+          "close": 8.64,
+          "volume": 64653424,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-27",
+          "close": 8.6,
+          "volume": 62012488,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-28",
+          "close": 8.63,
+          "volume": 45400581,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-01",
+          "close": 8.71,
+          "volume": 88418066,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-02",
+          "close": 8.7,
+          "volume": 48878990,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-03",
+          "close": 8.7,
+          "volume": 58537942,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-04",
+          "close": 8.67,
+          "volume": 42417505,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-05",
+          "close": 8.77,
+          "volume": 70589120,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-08",
+          "close": 8.74,
+          "volume": 78535350,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-09",
+          "close": 8.65,
+          "volume": 69546947,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-10",
+          "close": 8.67,
+          "volume": 44944816,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-11",
+          "close": 8.7,
+          "volume": 52852821,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-12",
+          "close": 8.78,
+          "volume": 113420106,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-15",
+          "close": 8.72,
+          "volume": 77783391,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-16",
+          "close": 8.63,
+          "volume": 73311522,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-17",
+          "close": 8.68,
+          "volume": 58060225,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-18",
+          "close": 8.68,
+          "volume": 36015407,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-19",
+          "close": 8.75,
+          "volume": 59697013,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-22",
+          "close": 8.71,
+          "volume": 58376582,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-23",
+          "close": 8.68,
+          "volume": 50946135,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-24",
+          "close": 8.74,
+          "volume": 59043959,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-25",
+          "close": 8.78,
+          "volume": 76202071,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-26",
+          "close": 8.77,
+          "volume": 53649172,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-29",
+          "close": 8.71,
+          "volume": 53936005,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-30",
+          "close": 8.67,
+          "volume": 53648410,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-31",
+          "close": 8.65,
+          "volume": 41460409,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-05",
+          "close": 8.71,
+          "volume": 68729368,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-06",
+          "close": 8.77,
+          "volume": 82089559,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-07",
+          "close": 8.91,
+          "volume": 168705544,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-08",
+          "close": 9.09,
+          "volume": 214207755,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-09",
+          "close": 9.04,
+          "volume": 157184047,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-12",
+          "close": 9.24,
+          "volume": 252274375,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-13",
+          "close": 9.02,
+          "volume": 185332575,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-14",
+          "close": 8.95,
+          "volume": 135488260,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-15",
+          "close": 8.87,
+          "volume": 108438120,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-16",
+          "close": 8.9,
+          "volume": 130452789,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-19",
+          "close": 9.01,
+          "volume": 134111407,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-20",
+          "close": 9.02,
+          "volume": 115196792,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-21",
+          "close": 8.87,
+          "volume": 131168539,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-22",
+          "close": 8.94,
+          "volume": 132643800,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-23",
+          "close": 8.89,
+          "volume": 131268813,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-26",
+          "close": 8.81,
+          "volume": 125035495,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-27",
+          "close": 8.71,
+          "volume": 110370334,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-28",
+          "close": 8.62,
+          "volume": 176956879,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-29",
+          "close": 8.61,
+          "volume": 170490022,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-30",
+          "close": 8.61,
+          "volume": 93066452,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-02",
+          "close": 8.55,
+          "volume": 103994274,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-03",
+          "close": 8.56,
+          "volume": 80386003,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-04",
+          "close": 8.66,
+          "volume": 88060937,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-05",
+          "close": 8.65,
+          "volume": 72900937,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-06",
+          "close": 8.6,
+          "volume": 60637123,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-09",
+          "close": 8.63,
+          "volume": 49938865,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-10",
+          "close": 8.61,
+          "volume": 47354621,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-11",
+          "close": 8.58,
+          "volume": 45506748,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-12",
+          "close": 8.57,
+          "volume": 49299651,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-13",
+          "close": 8.52,
+          "volume": 64447649,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-24",
+          "close": 8.56,
+          "volume": 57652117,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-25",
+          "close": 8.49,
+          "volume": 221676198,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-26",
+          "close": 8.53,
+          "volume": 81592918,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-27",
+          "close": 8.52,
+          "volume": 132547248,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-02",
+          "close": 8.66,
+          "volume": 252253329,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-03",
+          "close": 8.7,
+          "volume": 238488894,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-04",
+          "close": 8.68,
+          "volume": 154721435,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-05",
+          "close": 8.78,
+          "volume": 228029203,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-06",
+          "close": 8.83,
+          "volume": 148816146,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-09",
+          "close": 8.91,
+          "volume": 294556054,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-10",
+          "close": 8.89,
+          "volume": 177070154,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-11",
+          "close": 9.06,
+          "volume": 250433801,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-12",
+          "close": 9.16,
+          "volume": 271846527,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-13",
+          "close": 9.24,
+          "volume": 366843033,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-16",
+          "close": 9.06,
+          "volume": 275064067,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-17",
+          "close": 8.94,
+          "volume": 175528573,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-18",
+          "close": 8.87,
+          "volume": 155982025,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-19",
+          "close": 8.85,
+          "volume": 155702791,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-20",
+          "close": 8.86,
+          "volume": 190478941,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-23",
+          "close": 9.04,
+          "volume": 446998256,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-24",
+          "close": 9.14,
+          "volume": 246461003,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-25",
+          "close": 9.33,
+          "volume": 357935137,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-26",
+          "close": 9.25,
+          "volume": 213349626,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-27",
+          "close": 9.16,
+          "volume": 168507985,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-30",
+          "close": 9.15,
+          "volume": 148174853,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-31",
+          "close": 9.05,
+          "volume": 133749182,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-01",
+          "close": 8.95,
+          "volume": 156237711,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-02",
+          "close": 9.01,
+          "volume": 117201785,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-03",
+          "close": 8.81,
+          "volume": 121697947,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-07",
+          "close": 8.7,
+          "volume": 97150622,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-08",
+          "close": 8.78,
+          "volume": 119288723,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-09",
+          "close": 8.7,
+          "volume": 84572715,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-10",
+          "close": 8.71,
+          "volume": 90046997,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-13",
+          "close": 8.69,
+          "volume": 73487530,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-14",
+          "close": 8.7,
+          "volume": 76523481,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-15",
+          "close": 8.77,
+          "volume": 115023269,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-16",
+          "close": 8.76,
+          "volume": 84233182,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-17",
+          "close": 8.69,
+          "volume": 111930300,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-20",
+          "close": 8.77,
+          "volume": 127198865,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-21",
+          "close": 8.91,
+          "volume": 162986840,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-22",
+          "close": 8.96,
+          "volume": 149628955,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-23",
+          "close": 9.09,
+          "volume": 185022762,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-24",
+          "close": 9.07,
+          "volume": 137425903,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-27",
+          "close": 9.02,
+          "volume": 106621977,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-28",
+          "close": 9.09,
+          "volume": 145569042,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-29",
+          "close": 8.99,
+          "volume": 122653265,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-30",
+          "close": 8.99,
+          "volume": 176275479,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-06",
+          "close": 8.92,
+          "volume": 141850334,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-07",
+          "close": 9.06,
+          "volume": 153502319,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-08",
+          "close": 9.07,
+          "volume": 115255342,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-11",
+          "close": 9.19,
+          "volume": 144018206,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-12",
+          "close": 9.23,
+          "volume": 138939059,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-13",
+          "close": 9.24,
+          "volume": 155700910,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-14",
+          "close": 9.04,
+          "volume": 138566670,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-15",
+          "close": 9.14,
+          "volume": 136136004,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-18",
+          "close": 9.05,
+          "volume": 104214286,
+          "change_pct": 0
+        }
+      ]
+    },
+    {
+      "code": "003816",
+      "name": "中国广核",
+      "price": 4.8,
+      "change_pct": 0.418,
+      "volume": 129944626.0,
+      "amount": 622443771.0,
+      "high": 4.83,
+      "low": 4.74,
+      "open": 4.76,
+      "prev_close": 4.78,
+      "market_cap": 242394000000.0,
+      "pe_ttm": 24.82,
+      "pe_static": null,
+      "pb": 1.97,
+      "profit_growth": -9.9,
+      "roe": 9.11,
+      "ma20": 4.64,
+      "price_vs_ma20": 3.39,
+      "history": [
+        {
+          "date": "2025-11-14",
+          "close": 4.0,
+          "volume": 102152000,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-17",
+          "close": 3.94,
+          "volume": 124642557,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-18",
+          "close": 3.91,
+          "volume": 102413586,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-19",
+          "close": 3.91,
+          "volume": 89958732,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-20",
+          "close": 3.89,
+          "volume": 95474191,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-21",
+          "close": 3.82,
+          "volume": 139454231,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-24",
+          "close": 3.77,
+          "volume": 155770351,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-25",
+          "close": 3.78,
+          "volume": 93732316,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-26",
+          "close": 3.78,
+          "volume": 90837737,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-27",
+          "close": 3.79,
+          "volume": 92842130,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-11-28",
+          "close": 3.77,
+          "volume": 110872831,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-01",
+          "close": 3.79,
+          "volume": 121900593,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-02",
+          "close": 3.8,
+          "volume": 93890747,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-03",
+          "close": 3.85,
+          "volume": 155593334,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-04",
+          "close": 3.83,
+          "volume": 93795431,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-05",
+          "close": 3.85,
+          "volume": 102866000,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-08",
+          "close": 3.8,
+          "volume": 129511225,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-09",
+          "close": 3.79,
+          "volume": 127498260,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-10",
+          "close": 3.81,
+          "volume": 94906293,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-11",
+          "close": 3.79,
+          "volume": 97641120,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-12",
+          "close": 3.85,
+          "volume": 137142541,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-15",
+          "close": 3.87,
+          "volume": 122922065,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-16",
+          "close": 3.83,
+          "volume": 119827015,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-17",
+          "close": 3.83,
+          "volume": 108757274,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-18",
+          "close": 3.83,
+          "volume": 68805773,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-19",
+          "close": 3.85,
+          "volume": 71896807,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-22",
+          "close": 3.84,
+          "volume": 85998428,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-23",
+          "close": 3.82,
+          "volume": 95050315,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-24",
+          "close": 3.84,
+          "volume": 85805447,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-25",
+          "close": 3.85,
+          "volume": 134776184,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-26",
+          "close": 3.86,
+          "volume": 83509973,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-29",
+          "close": 3.82,
+          "volume": 114442770,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-30",
+          "close": 3.76,
+          "volume": 175325750,
+          "change_pct": 0
+        },
+        {
+          "date": "2025-12-31",
+          "close": 3.76,
+          "volume": 75373903,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-05",
+          "close": 3.77,
+          "volume": 105464694,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-06",
+          "close": 3.82,
+          "volume": 133326426,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-07",
+          "close": 3.85,
+          "volume": 136386861,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-08",
+          "close": 3.93,
+          "volume": 170753663,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-09",
+          "close": 3.9,
+          "volume": 135824589,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-12",
+          "close": 3.92,
+          "volume": 170315225,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-13",
+          "close": 3.88,
+          "volume": 169281800,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-14",
+          "close": 3.85,
+          "volume": 152627183,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-15",
+          "close": 3.83,
+          "volume": 106880695,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-16",
+          "close": 3.85,
+          "volume": 159853169,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-19",
+          "close": 3.88,
+          "volume": 137043664,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-20",
+          "close": 3.94,
+          "volume": 201405472,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-21",
+          "close": 3.88,
+          "volume": 146894594,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-22",
+          "close": 3.91,
+          "volume": 177109103,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-23",
+          "close": 3.88,
+          "volume": 151819646,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-26",
+          "close": 3.9,
+          "volume": 169924644,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-27",
+          "close": 3.84,
+          "volume": 161201350,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-28",
+          "close": 3.86,
+          "volume": 157672913,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-29",
+          "close": 3.85,
+          "volume": 197913513,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-01-30",
+          "close": 3.85,
+          "volume": 141813110,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-02",
+          "close": 3.87,
+          "volume": 249566006,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-03",
+          "close": 3.84,
+          "volume": 187806010,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-04",
+          "close": 3.92,
+          "volume": 283874729,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-05",
+          "close": 3.92,
+          "volume": 158610529,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-06",
+          "close": 3.92,
+          "volume": 130624972,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-09",
+          "close": 3.92,
+          "volume": 106771002,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-10",
+          "close": 3.9,
+          "volume": 71565394,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-11",
+          "close": 3.89,
+          "volume": 78962472,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-12",
+          "close": 3.88,
+          "volume": 97874401,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-13",
+          "close": 3.83,
+          "volume": 152200690,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-24",
+          "close": 3.91,
+          "volume": 163096968,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-25",
+          "close": 3.91,
+          "volume": 145639408,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-26",
+          "close": 3.92,
+          "volume": 133950873,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-02-27",
+          "close": 3.95,
+          "volume": 272812462,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-02",
+          "close": 4.06,
+          "volume": 271664146,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-03",
+          "close": 4.02,
+          "volume": 249041931,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-04",
+          "close": 4.05,
+          "volume": 238163709,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-05",
+          "close": 4.12,
+          "volume": 247373457,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-06",
+          "close": 4.15,
+          "volume": 178000051,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-09",
+          "close": 4.17,
+          "volume": 263448143,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-10",
+          "close": 4.23,
+          "volume": 230020162,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-11",
+          "close": 4.37,
+          "volume": 283881638,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-12",
+          "close": 4.38,
+          "volume": 257989605,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-13",
+          "close": 4.33,
+          "volume": 272211203,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-16",
+          "close": 4.23,
+          "volume": 220296073,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-17",
+          "close": 4.16,
+          "volume": 181098162,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-18",
+          "close": 4.15,
+          "volume": 157117369,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-19",
+          "close": 4.13,
+          "volume": 158002527,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-20",
+          "close": 4.11,
+          "volume": 185142971,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-23",
+          "close": 4.2,
+          "volume": 418276147,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-24",
+          "close": 4.37,
+          "volume": 425639295,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-25",
+          "close": 4.51,
+          "volume": 398709137,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-26",
+          "close": 4.6,
+          "volume": 413558983,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-27",
+          "close": 4.65,
+          "volume": 304073230,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-30",
+          "close": 4.6,
+          "volume": 258193411,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-03-31",
+          "close": 4.61,
+          "volume": 221810334,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-01",
+          "close": 4.52,
+          "volume": 289459461,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-02",
+          "close": 4.55,
+          "volume": 220141823,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-03",
+          "close": 4.52,
+          "volume": 148890302,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-07",
+          "close": 4.5,
+          "volume": 132944506,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-08",
+          "close": 4.54,
+          "volume": 177471458,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-09",
+          "close": 4.54,
+          "volume": 149971181,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-10",
+          "close": 4.48,
+          "volume": 202939641,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-13",
+          "close": 4.46,
+          "volume": 137860789,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-14",
+          "close": 4.44,
+          "volume": 115331581,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-15",
+          "close": 4.45,
+          "volume": 165938663,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-16",
+          "close": 4.42,
+          "volume": 120907807,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-17",
+          "close": 4.39,
+          "volume": 110502890,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-20",
+          "close": 4.49,
+          "volume": 166094981,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-21",
+          "close": 4.57,
+          "volume": 164799675,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-22",
+          "close": 4.62,
+          "volume": 120971819,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-23",
+          "close": 4.66,
+          "volume": 130802484,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-24",
+          "close": 4.64,
+          "volume": 151010081,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-27",
+          "close": 4.62,
+          "volume": 108342303,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-28",
+          "close": 4.71,
+          "volume": 134609334,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-29",
+          "close": 4.54,
+          "volume": 231861784,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-04-30",
+          "close": 4.58,
+          "volume": 142408180,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-06",
+          "close": 4.59,
+          "volume": 168084332,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-07",
+          "close": 4.64,
+          "volume": 134532861,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-08",
+          "close": 4.68,
+          "volume": 129747443,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-11",
+          "close": 4.76,
+          "volume": 127219753,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-12",
+          "close": 4.77,
+          "volume": 164501423,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-13",
+          "close": 4.83,
+          "volume": 159842376,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-14",
+          "close": 4.76,
+          "volume": 170586884,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-15",
+          "close": 4.78,
+          "volume": 147296972,
+          "change_pct": 0
+        },
+        {
+          "date": "2026-05-18",
+          "close": 4.8,
+          "volume": 129944626,
+          "change_pct": 0
+        }
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "name": "PE(TTM)",
+      "key": "pe_ttm",
+      "unit": "",
+      "threshold_high": 30,
+      "threshold_low": 15,
+      "direction": "low_is_better",
+      "current_value": 22.415,
+      "signal": "neutral",
+      "values_from_stocks": [
+        20.01,
+        24.82
+      ]
+    },
+    {
+      "name": "PB",
+      "key": "pb",
+      "unit": "",
+      "threshold_high": 3,
+      "threshold_low": 1.5,
+      "direction": "low_is_better",
+      "current_value": 1.775,
+      "signal": "neutral",
+      "values_from_stocks": [
+        1.58,
+        1.97
+      ]
+    },
+    {
+      "name": "净利润增速(%)",
+      "key": "profit_growth",
+      "unit": "%",
+      "threshold_high": null,
+      "threshold_low": 10,
+      "direction": "high_is_better",
+      "current_value": -1.9500000000000002,
+      "signal": "bad",
+      "values_from_stocks": [
+        6.0,
+        -9.9
+      ]
+    },
+    {
+      "name": "ROE(%)",
+      "key": "roe",
+      "unit": "%",
+      "threshold_high": null,
+      "threshold_low": 8,
+      "direction": "high_is_better",
+      "current_value": 8.66,
+      "signal": "neutral",
+      "values_from_stocks": [
+        8.21,
+        9.11
+      ]
+    },
+    {
+      "name": "股价相对MA20",
+      "key": "price_vs_ma20",
+      "unit": "%",
+      "threshold_high": 10,
+      "threshold_low": -10,
+      "direction": "range",
+      "current_value": 1.895,
+      "signal": "good",
+      "values_from_stocks": [
+        0.4,
+        3.39
+      ]
+    }
+  ],
+  "overall_signal": "warning",
+  "signal_message": "🟡 部分指标接近临界点"
+}
