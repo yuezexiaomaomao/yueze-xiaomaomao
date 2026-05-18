@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>核能产业链深度分析 — 10年现金流模型与DCF估值 | #0002</title>
 <link rel="stylesheet" href="../style.css">
-<meta name="description" content="核能投资完整逻辑：全球核能复苏背景、铀供需分析、A股标的筛选、10年现金流预测模型、DCF与PE交叉估值、科技创新分析、五维产业视角（政学企民投双面分析）">
+<meta name="description" content="核能投资完整逻辑：全球核能复苏背景、铀供需分析、A股标的筛选、10年现金流预测模型、DCF与PE交叉估值、电力供需与电价情景分析、五维产业视角（政学企民投双面分析）">
 <style>
 /* 报告页特有样式 */
 .report-header {
@@ -475,7 +475,7 @@
       <li><a href="#ch2">上游核心变量：铀的供需与价格</a></li>
       <li><a href="#ch3">标的筛选：A股主板纯核能公司</a></li>
       <li><a href="#ch4">现金流数学模型（10年预测）</a></li>
-      <li><a href="#ch5">DCF估值与股价预测</a> <span style="color:var(--text-muted);font-size:0.78rem">（含PE交叉验证+技术变革分析）</span></li>
+      <li><a href="#ch5">DCF估值与股价预测</a> <span style="color:var(--text-muted);font-size:0.78rem">（含PE交叉验证+电力供需与电价分析）</span></li>
       <li><a href="#ch6">关键跟踪事项清单</a></li>
       <li><a href="#ch7">五维分析框架：政学企民投</a></li>
     </ol>
@@ -1011,12 +1011,73 @@
       是逐步建仓的合理窗口。但需注意2026-2028年FCF为负阶段可能压制股价表现，需要有2-3年的耐心。
     </div>
 
-    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">5.3 敏感性分析：哪个变量最关键？</h3>
+    <h3 style="margin:24px 0 14px;font-size:1.02rem;font-weight:700;color:var(--text-primary)">5.3 电力供需与电价分析：核心变量深度拆解</h3>
 
-    <div class="chart-section">
-      <h4>🎚️ 各变量对估值的影响程度排序</h4>
-      <canvas id="chartSensitivity"></canvas>
-    </div>
+    <h4 style="margin:18px 0 10px;font-weight:700;color:var(--text-primary)">📊 供需基本面：需求增长有支撑，核电定位越来越关键</h4>
+    <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:10px">
+      中国全社会用电量2025年约 <b>9.8万亿 kWh</b>，预计2030年增至 <b>12~13万亿 kWh</b>（CAGR ~4-5%），
+      增长并非线性——是电力弹性系数（&gt;1）和GDP增速叠加的结果。三个增量板块值得逐个看：
+    </p>
+    <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:12px">
+      <li><b>AI数据中心</b>：Goldman Sachs预计2030年AI数据中心占全球电力消耗<b>8-10%</b>（2023年仅2-3%）。
+      国内字节跳动/BAT/华为云的算力扩张，相当于每年新增一个中型省份的用电量。
+      数据中心需要<b>24/7基荷电力</b>，风光无法满足，气电贵且碳排高——核电是唯一能大规模提供的清洁基荷方案。</li>
+      <li><b>新能源汽车+充电桩</b>：2030年新能源汽车保有量预计超1亿辆，充电桩年耗电量超<b>3,000亿 kWh</b>（约等于三个三峡电站）。
+      充电负荷集中在夜间，与核电24小时满发特性完美匹配。</li>
+      <li><b>制造业电气化</b>：钢铁/水泥/化工行业"电代煤"趋势不可逆，工业用电增速超过GDP增速的趋势将持续5-10年。</li>
+    </ul>
+
+    <h4 style="margin:18px 0 10px;font-weight:700;color:var(--text-primary)">🏛️ 电价政策现状：市场化是大趋势，但核电有制度护城河</h4>
+    <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:10px">
+      当前核电执行<b>标杆电价</b>制度，各省差异较大（广东0.43元/kWh、浙江0.42元/kWh、福建0.39元/kWh、辽宁0.37元/kWh等）。
+      关键趋势：
+    </p>
+    <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:12px">
+      <li><b>市场化交易比例逐年提升</b>：2023年核电市场化比例约15%，2025年已接近30%。广东/浙江等先行省份核电参与竞价的比例已达50%+。
+      竞价成交价通常低于标杆电价（广东电力市场均价约0.38-0.40元/kWh vs 标杆0.43元/kWh）</li>
+      <li><b>但核电在竞价中有天然优势</b>：核电边际成本极低（燃料成本仅~9%，远低于气电~70%、煤电~60%），在竞价中可以报低价仍能盈利。
+      市场化并不等于核电会被淘汰——只是利润空间被压缩。</li>
+      <li><b>政策保护依然存在</b>：国家发改委明确核电保障性收购政策，保障利用小时数不低于5,000h/年，
+      超额部分参与市场交易。这不是完全放开竞争。</li>
+      <li><b>中长期最大的利好变量</b>：AI数据中心<strong>核电直供PPA</strong>模式正在萌芽。
+      微软已签20年核电购电协议，国内字节跳动/阿里等也在探索核电直供。
+      直供PPA不受电力市场竞价影响，可获高于标杆电价的清洁能源溢价（预计<b>0.45-0.55元/kWh</b>）。
+      一旦规模化，可能扭转电价下行趋势。</li>
+    </ul>
+
+    <h4 style="margin:18px 0 10px;font-weight:700;color:var(--text-primary)">🔮 电价情景预估：三种路径，一个核心判断</h4>
+    <table class="compare-table" style="margin-bottom:14px">
+      <tr>
+        <th style="width:22%">情景</th>
+        <th style="width:32%">驱动因素</th>
+        <th style="width:18%">加权电价</th>
+        <th style="width:28%">对估值影响</th>
+      </tr>
+      <tr>
+        <td><span style="color:var(--signal-danger)">🔴 保守</span></td>
+        <td>市场化比例快速升至50%+，竞价压缩利润；无数据中心直供落地</td>
+        <td><b>0.33~0.35 元/kWh</b>（较当前↓8-12%）</td>
+        <td>DCF目标价下调<b>20-30%</b>，至~9-10元</td>
+      </tr>
+      <tr>
+        <td><span style="color:var(--signal-warning)">🟡 中性</span></td>
+        <td>市场化比例稳步提升至30-40%，直供开始试点但未大规模铺开</td>
+        <td><b>0.35~0.38 元/kWh</b>（基本持平或略降）</td>
+        <td>DCF目标价~12-13元，与当前测算一致</td>
+      </tr>
+      <tr>
+        <td><span style="color:var(--signal-safe)">🟢 乐观</span></td>
+        <td>核电直供AI数据中心大规模落地，溢价电价叠加装机加速</td>
+        <td><b>0.40~0.45 元/kWh</b>（较当前↑5-15%）</td>
+        <td>DCF目标价上调<b>20-30%</b>，至~15-17元</td>
+      </tr>
+    </table>
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px">
+      *加权电价指标杆+市场化交易+直供的平均综合电价，反映实际入账水平
+    </p>
+
+    <h4 style="margin:18px 0 10px;font-weight:700;color:var(--text-primary)">🎚️ 各变量对估值的影响程度排序</h4>
+    <canvas id="chartSensitivity"></canvas>
 
     <table class="compare-table">
       <tr>
