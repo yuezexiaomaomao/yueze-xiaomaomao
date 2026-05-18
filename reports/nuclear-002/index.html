@@ -170,7 +170,7 @@ body {
 <!-- ========== TAB 导航 ========== -->
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('report')">📄 最新研报</button>
-  <button class="tab-btn" onclick="switchTab('history')">📂 历史版本 <span class="badge">2</span></button>
+  <button class="tab-btn" onclick="switchTab('history')">📂 历史版本 <span class="badge">1</span></button>
 </div>
 
 <!-- ========== TAB 1：最新研报 ========== -->
@@ -233,8 +233,7 @@ function resizeIframe(iframe) {
 
 // ===== 版本列表 =====
 const VERSIONS = [
-  {file: "latest.html", label: "最新版", date: "2026-05-18", desc: "当前最新版本（含电力供需与电价情景分析、五维框架）", current: true},
-  {file: "v1-2026-05-18.html", label: "v1", date: "2026-05-18", desc: "初版发布 — 核能产业链 + 10年现金流模型 + DCF估值", current: false},
+  {file: "latest.html", label: "最新版", date: "2026-05-18", desc: "核能产业链 + 10年现金流模型 + DCF估值 · 含电力供需与电价情景分析、五维框架", current: true},
 ];
 
 // ===== 追踪数据 =====
