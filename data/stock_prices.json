@@ -6,6 +6,7 @@
     "pe": 22.5,
     "pb": 2.15,
     "changePercent": -0.73,
+    "rating": "S",
     "updated_at": "2026-05-16T15:30:00"
   },
   {
@@ -15,6 +16,27 @@
     "pe": 18.2,
     "pb": 1.52,
     "changePercent": 0.47,
+    "rating": "A",
     "updated_at": "2026-05-16T15:30:00"
+  },
+  {
+    "code": "601611",
+    "name": "中国核建",
+    "price": null,
+    "pe": 26.0,
+    "pb": null,
+    "changePercent": null,
+    "rating": "B+",
+    "note": "股价待接入data_fetcher"
+  },
+  {
+    "code": "000777",
+    "name": "中核科技",
+    "price": null,
+    "pe": 45.0,
+    "pb": null,
+    "changePercent": null,
+    "rating": "B",
+    "note": "股价待接入data_fetcher"
   }
 ]

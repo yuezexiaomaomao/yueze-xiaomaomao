@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>中国核电 (601985.SH) 深度分析 - 月泽小猫猫的逻辑库</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<title>#0002 核能产业链深度分析 - 月泽小猫猫的逻辑库</title>
 <style>
 :root {
   --bg: #f5f5f5; --bg-card: #fff; --text-primary: #1a1a1a;
@@ -13,115 +12,121 @@
   --radius-md: 10px; --radius-sm: 6px;
   --shadow: 0 2px 8px rgba(0,0,0,0.08);
   --signal-safe: #43a047; --signal-danger: #e53935; --signal-warning: #f9a825;
-  --flat-color: #ff6d00;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
   background: var(--bg); color: var(--text-primary);
-  line-height: 1.6; padding: 0;
+  line-height: 1.6;
 }
 
-/* Header section */
-.hero {
-  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-  color: #fff; padding: 40px 32px 32px;
+/* ===== Header ===== */
+.page-header {
+  background: #fff; border-bottom: 1px solid var(--border-color);
+  padding: 16px 24px;
 }
-.breadcrumb { margin-bottom: 12px; font-size: 0.82rem; }
-.breadcrumb a {
-  color: rgba(255,255,255,0.7); text-decoration: none;
-  transition: color 0.2s;
+.page-header .breadcrumb {
+  font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;
 }
-.breadcrumb a:hover { color: #fff; }
-.hero h1 { font-size: 1.6rem; margin-bottom: 4px; }
-.hero .subtitle { font-size: 0.9rem; opacity: 0.8; margin-bottom: 18px; }
-.dashboard-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px; max-width: 700px;
+.page-header .breadcrumb a {
+  color: var(--accent); text-decoration: none;
 }
-.dashboard-item {
-  background: rgba(255,255,255,0.12); border-radius: var(--radius-sm);
-  padding: 10px 14px; backdrop-filter: blur(6px);
+.page-header .breadcrumb a:hover { text-decoration: underline; }
+.page-header h1 {
+  font-size: 1.2rem; font-weight: 700; color: var(--text-primary);
 }
-.dashboard-item .label { font-size: 0.72rem; opacity: 0.7; }
-.dashboard-item .value { font-size: 1.1rem; font-weight: 700; }
-.dashboard-item .value.signal-up { color: #ef5350; }
-.dashboard-item .value.signal-down { color: #66bb6a; }
-.dashboard-item .value.signal-flat { color: var(--flat-color); }
 
-/* Tab navigation */
+/* ===== Tab navigation ===== */
 .tab-nav {
   display: flex; background: #fff; border-bottom: 1px solid var(--border-color);
   position: sticky; top: 0; z-index: 100;
 }
 .tab-btn {
-  padding: 14px 24px; cursor: pointer; font-size: 0.9rem;
+  padding: 14px 24px; cursor: pointer; font-size: 0.92rem;
   font-weight: 500; color: var(--text-muted);
   border: none; background: none; transition: all 0.2s;
   border-bottom: 2px solid transparent;
 }
 .tab-btn:hover { color: var(--text-primary); background: #f8f8f8; }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-.tab-btn .badge {
-  display: inline-block; background: var(--accent); color: #fff;
-  font-size: 0.7rem; border-radius: 10px; padding: 0 7px;
-  margin-left: 4px; line-height: 1.5;
-}
 
-/* Tab content */
+/* ===== Tab content ===== */
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* Report iframe */
-.report-container { padding: 0; }
-.report-container iframe {
-  width: 100%; border: none; display: block;
-  min-height: 2000px;
-}
+/* ===== Dashboard Tab ===== */
+.dashboard-container { padding: 24px; max-width: 1000px; }
 
-/* History tab */
-.history-container { padding: 24px 32px; max-width: 900px; }
-.history-list { list-style: none; }
-.history-item {
-  display: flex; align-items: flex-start; gap: 16px;
-  padding: 16px 0; border-bottom: 1px solid var(--border-color);
+/* Stock grid */
+.stock-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px; margin-bottom: 28px;
 }
-.history-item:last-child { border-bottom: none; }
-.version-tag {
-  flex-shrink: 0; background: var(--accent); color: #fff;
-  padding: 3px 10px; border-radius: var(--radius-sm);
-  font-size: 0.78rem; font-weight: 600;
+.stock-card {
+  background: var(--bg-card); border-radius: var(--radius-md);
+  padding: 16px; box-shadow: var(--shadow);
+  border-left: 4px solid var(--border-color);
 }
-.version-tag.current { background: var(--signal-safe); }
-.history-meta { flex-grow: 1; }
-.history-date { font-size: 0.82rem; color: var(--text-muted); }
-.history-desc { font-size: 0.92rem; margin-top: 2px; }
-.history-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; }
-.history-link:hover { text-decoration: underline; }
+.stock-card.rating-s { border-left-color: #1a237e; }
+.stock-card.rating-a { border-left-color: var(--accent); }
+.stock-card.rating-bp { border-left-color: #43a047; }
+.stock-card.rating-b { border-left-color: var(--text-muted); }
+.stock-card .stock-name {
+  font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;
+}
+.stock-card .stock-code {
+  font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px;
+}
+.stock-card .stock-metrics {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px;
+}
+.stock-card .metric-label { font-size: 0.72rem; color: var(--text-muted); }
+.stock-card .metric-value { font-size: 0.95rem; font-weight: 600; }
+.stock-card .metric-value.up { color: #ef5350; }
+.stock-card .metric-value.down { color: #66bb6a; }
+.stock-card .no-data {
+  font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-top: 8px;
+}
+.rating-badge {
+  display: inline-block; font-size: 0.68rem; font-weight: 600;
+  padding: 1px 8px; border-radius: 3px; margin-bottom: 8px;
+}
+.rating-badge.s { background: #e8eaf6; color: #1a237e; }
+.rating-badge.a { background: #e3f2fd; color: #1565c0; }
+.rating-badge.bp { background: #e8f5e9; color: #2e7d32; }
+.rating-badge.b { background: #f5f5f5; color: #616161; }
 
-/* Tracking section */
-.tracking-container { padding: 0 32px 32px; max-width: 900px; }
-.tracking-container h3 {
-  font-size: 1.05rem; font-weight: 700; margin: 24px 0 12px;
+/* Tracking table */
+.tracking-section { margin-top: 28px; }
+.tracking-section h3 {
+  font-size: 1rem; font-weight: 700; margin-bottom: 12px;
   padding-top: 20px; border-top: 1px solid var(--border-color);
 }
 .tracking-table {
   width: 100%; border-collapse: collapse; font-size: 0.88rem;
+  background: var(--bg-card); border-radius: var(--radius-md);
+  overflow: hidden; box-shadow: var(--shadow);
 }
 .tracking-table th {
-  text-align: left; padding: 8px 12px;
+  text-align: left; padding: 10px 14px;
   background: #f0f0f0; font-weight: 600;
   border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
 }
 .tracking-table td {
-  padding: 8px 12px; border-bottom: 1px solid #eee;
+  padding: 10px 14px; border-bottom: 1px solid #eee;
 }
+.tracking-table tr:last-child td { border-bottom: none; }
 .tracking-table .status-ok { color: var(--signal-safe); font-weight: 600; }
 .tracking-table .status-warn { color: var(--signal-warning); font-weight: 600; }
 .tracking-table .status-err { color: var(--signal-danger); font-weight: 600; }
 
-/* Events list */
-.event-list { list-style: none; margin-top: 8px; }
+/* Events */
+.events-section { margin-top: 28px; }
+.events-section h3 {
+  font-size: 1rem; font-weight: 700; margin-bottom: 10px;
+}
+.event-list { list-style: none; }
 .event-list li {
   padding: 6px 0; font-size: 0.88rem;
   display: flex; align-items: flex-start; gap: 8px;
@@ -129,95 +134,124 @@ body {
 .event-list li::before {
   content: "☐"; font-size: 1rem; flex-shrink: 0; margin-top: 1px;
 }
-.event-list li.done::before { content: "☑"; color: var(--signal-safe); }
 .event-tag {
   font-size: 0.72rem; border-radius: 3px; padding: 1px 6px;
   margin-left: 8px; flex-shrink: 0;
 }
 .event-tag.upcoming { background: #fff3e0; color: #e65100; }
-.event-tag.alert { background: #ffebee; color: #c62828; }
-.event-tag.done { background: #e8f5e9; color: #2e7d32; }
+
+/* ===== Report Tab ===== */
+.report-container { padding: 0; }
+.history-toggle {
+  display: block; width: 100%; padding: 12px 24px;
+  background: #f8f8f8; border: none; border-bottom: 1px solid var(--border-color);
+  font-size: 0.88rem; color: var(--accent); cursor: pointer; text-align: left;
+  font-family: inherit; transition: background 0.15s;
+}
+.history-toggle:hover { background: #f0f0f0; }
+.history-toggle .arrow { transition: transform 0.2s; display: inline-block; margin-right: 4px; }
+.history-toggle.open .arrow { transform: rotate(90deg); }
+
+.history-panel {
+  display: none; background: #fafafa; border-bottom: 1px solid var(--border-color);
+  padding: 16px 24px;
+}
+.history-panel.open { display: block; }
+.history-panel .version-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid #eee;
+}
+.history-panel .version-item:last-child { border-bottom: none; }
+.version-tag {
+  flex-shrink: 0; background: var(--accent); color: #fff;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: 0.75rem; font-weight: 600;
+}
+.version-date { font-size: 0.78rem; color: var(--text-muted); }
+.version-desc { font-size: 0.85rem; margin-top: 1px; }
+.version-link { font-size: 0.82rem; color: var(--accent); text-decoration: none; }
+.version-link:hover { text-decoration: underline; }
+
+.report-container iframe {
+  width: 100%; border: none; display: block;
+  min-height: 2000px;
+}
 
 @media (max-width: 600px) {
-  .hero { padding: 24px 16px 20px; }
-  .hero h1 { font-size: 1.3rem; }
-  .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-  .tab-btn { padding: 12px 14px; font-size: 0.82rem; }
-  .history-container, .tracking-container { padding: 16px; }
+  .page-header { padding: 12px 16px; }
+  .page-header h1 { font-size: 1.05rem; }
+  .tab-btn { padding: 12px 16px; font-size: 0.85rem; }
+  .dashboard-container { padding: 16px; }
+  .stock-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ========== HERO / 标题 + 仪表板 ========== -->
-<div class="hero">
+<!-- ========== Header ========== -->
+<div class="page-header">
   <div class="breadcrumb">
-    <a href="../../index.html">← 返回首页</a>
+    <a href="../../index.html">首页</a> › #0002 核能产业链深度分析
   </div>
-  <h1>中国核电 (601985.SH) 深度分析</h1>
-  <div class="subtitle">核能产业链 · 10年现金流模型 · DCF估值 | 最新更新: 2026-05-18</div>
-  <div class="dashboard-grid">
-    <div class="dashboard-item">
-      <div class="label">股价</div>
-      <div class="value" id="dashPrice">—</div>
-    </div>
-    <div class="dashboard-item">
-      <div class="label">PE(TTM)</div>
-      <div class="value" id="dashPE">—</div>
-    </div>
-    <div class="dashboard-item">
-      <div class="label">PB</div>
-      <div class="value" id="dashPB">—</div>
-    </div>
-    <div class="dashboard-item">
-      <div class="label">涨跌幅</div>
-      <div class="value" id="dashChange">—</div>
-    </div>
-  </div>
+  <h1>#0002 核能产业链 — 10年现金流模型与DCF估值</h1>
 </div>
 
-<!-- ========== TAB 导航 ========== -->
+<!-- ========== Tab 导航 ========== -->
 <div class="tab-nav">
   <button class="tab-btn active" onclick="switchTab('report')">📄 最新研报</button>
-  <button class="tab-btn" onclick="switchTab('history')">📂 历史版本 <span class="badge">1</span></button>
+  <button class="tab-btn" onclick="switchTab('dashboard')">📊 最新仪表盘</button>
 </div>
 
-<!-- ========== TAB 1：最新研报 ========== -->
+<!-- ========== Tab 1：最新研报（默认） ========== -->
 <div id="tab-report" class="tab-content active">
+  <button class="history-toggle" id="historyToggle" onclick="toggleHistory()">
+    <span class="arrow">▶</span> 📂 查看历史版本 (1)
+  </button>
+  <div class="history-panel" id="historyPanel">
+    <div class="version-item">
+      <span class="version-tag">v1</span>
+      <div>
+        <div class="version-date">2026-05-18</div>
+        <div class="version-desc">核能产业链 + 10年现金流模型 + DCF估值 · 含电力供需与电价情景、五维框架</div>
+        <a href="latest.html" class="version-link" target="_blank">在新窗口打开 →</a>
+      </div>
+    </div>
+  </div>
   <div class="report-container">
     <iframe id="reportFrame" src="latest.html" onload="resizeIframe(this)"></iframe>
   </div>
 </div>
 
-<!-- ========== TAB 2：历史版本 ========== -->
-<div id="tab-history" class="tab-content">
-  <div class="history-container">
-    <h3 style="margin-bottom:12px">历史版本</h3>
-    <ul class="history-list" id="versionList">
+<!-- ========== Tab 2：最新仪表盘 ========== -->
+<div id="tab-dashboard" class="tab-content">
+  <div class="dashboard-container">
+
+    <h3 style="margin-bottom:12px;font-size:1.05rem;">📊 投资标的一览</h3>
+    <div class="stock-grid" id="stockGrid">
       <!-- 由 JS 动态渲染 -->
-    </ul>
+    </div>
+
+    <div class="tracking-section">
+      <h3>📡 追踪仪表板</h3>
+      <table class="tracking-table">
+        <thead>
+          <tr><th>指标</th><th>0002-1(26.5.18)</th><th>当前值</th><th>变化</th><th>状态</th></tr>
+        </thead>
+        <tbody id="trackingBody"></tbody>
+      </table>
+    </div>
+
+    <div class="events-section">
+      <h3>📅 待关注事件</h3>
+      <ul class="event-list">
+        <li>Q2 核电核准公告 <span class="event-tag upcoming">预计7月</span></li>
+        <li>2026年半年报披露 <span class="event-tag upcoming">预计8月底</span></li>
+        <li>铀长协谈判进展（Kazatomprom） <span class="event-tag upcoming">关注中</span></li>
+        <li>电力市场化交易比例更新 <span class="event-tag upcoming">季度更新</span></li>
+      </ul>
+    </div>
+
   </div>
-</div>
-
-<!-- ========== 追踪仪表板（位于最下方） ========== -->
-<div class="tracking-container">
-  <h3>📡 追踪仪表板</h3>
-  <table class="tracking-table">
-    <thead>
-      <tr><th>指标</th><th>0002-1(26.5.18)</th><th>当前值</th><th>变化</th><th>状态</th></tr>
-    </thead>
-    <tbody id="trackingBody">
-      <!-- 由 JS 动态渲染 -->
-    </tbody>
-  </table>
-
-  <h3>📅 待关注事件</h3>
-  <ul class="event-list" id="eventList">
-    <li>Q2 核电核准公告 <span class="event-tag upcoming">预计7月</span></li>
-    <li>2026年半年报披露 <span class="event-tag upcoming">预计8月底</span></li>
-    <li>铀长协谈判进展（Kazatomprom） <span class="event-tag upcoming">关注中</span></li>
-    <li>电力市场化交易比例更新 <span class="event-tag upcoming">季度更新</span></li>
-  </ul>
 </div>
 
 <script>
@@ -227,114 +261,137 @@ function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   document.querySelector(`.tab-btn[onclick*="${name}"]`).classList.add('active');
-  if (name === 'history') renderVersionList();
+  if (name === 'dashboard') renderAll();
+}
+
+// ===== 历史版本折叠 =====
+function toggleHistory() {
+  var panel = document.getElementById('historyPanel');
+  var btn = document.getElementById('historyToggle');
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open');
+  btn.classList.toggle('open');
+  btn.querySelector('.arrow').textContent = isOpen ? '▶' : '▼';
 }
 
 // ===== iframe 自适应高度 =====
 function resizeIframe(iframe) {
-  function setHeight() {
+  function set() {
     try {
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      const h = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight, 2000);
-      iframe.style.height = h + 'px';
-    } catch(e) {
-      iframe.style.height = '5000px';
-    }
+      var d = iframe.contentDocument || iframe.contentWindow.document;
+      iframe.style.height = Math.max(d.documentElement.scrollHeight, d.body.scrollHeight, 2000) + 'px';
+    } catch(e) { iframe.style.height = '5000px'; }
   }
-  setHeight();
-  // Chart.js 图表渲染有延迟，500ms后重算一次
-  setTimeout(setHeight, 800);
-  setTimeout(setHeight, 2000);
+  set(); setTimeout(set, 800); setTimeout(set, 2000);
 }
-
-// ===== 版本列表 =====
-const VERSIONS = [
-  {file: "latest.html", label: "最新版", date: "2026-05-18", desc: "核能产业链 + 10年现金流模型 + DCF估值 · 含电力供需与电价情景分析、五维框架", current: true},
-];
 
 // ===== 追踪数据 =====
-const TRACKING = [
-  {label: "股价", lastVal: "9.04", field: "price"},
-  {label: "PE(TTM)", lastVal: "18.5x", field: "pe"},
-  {label: "PB", lastVal: "—", field: "pb"},
-  {label: "DCF目标价（中性）", lastVal: "12.5元", field: null, currentVal: "待重算"},
-  {label: "在建机组", lastVal: "12台（含核准待建）", field: null, currentVal: "待更新"},
-  {label: "累计装机（已投产）", lastVal: "~25GW", field: null, currentVal: "待更新"},
-  {label: "综合上网电价", lastVal: "~0.37元/kWh", field: null, currentVal: "待更新"},
+var TRACKING = [
+  {label: "中国核电 股价", lastVal: "9.04", field: "price", stockCode: "601985"},
+  {label: "中国核电 PE(TTM)", lastVal: "18.5x", field: "pe", stockCode: "601985"},
+  {label: "中国核电 PB", lastVal: "—", field: "pb", stockCode: "601985"},
+  {label: "中国广核 股价", lastVal: "—", field: "price", stockCode: "003816"},
+  {label: "DCF目标价（中性）", lastVal: "12.5元", currentVal: "待重算"},
+  {label: "在建机组", lastVal: "12台（含核准待建）", currentVal: "待更新"},
+  {label: "累计装机（已投产）", lastVal: "~25GW", currentVal: "待更新"},
 ];
 
-// ===== 渲染历史版本列表 =====
-function renderVersionList() {
-  const list = document.getElementById('versionList');
-  list.innerHTML = '';
-  VERSIONS.forEach(v => {
-    const li = document.createElement('li');
-    li.className = 'history-item';
-    li.innerHTML = `
-      <span class="version-tag ${v.current ? 'current' : ''}">${v.label}</span>
-      <div class="history-meta">
-        <div class="history-date">${v.date}</div>
-        <div class="history-desc">${v.desc}</div>
-        <a href="${v.file}" class="history-link" target="_blank">查看完整内容 →</a>
-      </div>
-    `;
-    list.appendChild(li);
+// ===== 股票数据缓存 =====
+var stockData = [];
+
+// ===== 渲染股票卡片 =====
+function renderStockCards() {
+  var grid = document.getElementById('stockGrid');
+  var ratings = {'S':'s','A':'a','B+':'bp','B':'b'};
+  var html = '';
+  stockData.forEach(function(s) {
+    var ratingClass = ratings[s.rating] || 'b';
+    var hasData = s.price != null;
+    var priceStr = hasData ? s.price.toFixed(2) : '—';
+    var peStr = s.pe != null ? s.pe.toFixed(1) + 'x' : '—';
+    var pbStr = s.pb != null ? s.pb.toFixed(2) + 'x' : '—';
+    var chgStr = '—', chgClass = '';
+    if (s.changePercent != null) {
+      chgStr = (s.changePercent > 0 ? '+' : '') + s.changePercent.toFixed(2) + '%';
+      chgClass = s.changePercent > 0 ? 'up' : s.changePercent < 0 ? 'down' : '';
+    }
+    html += '<div class="stock-card rating-' + ratingClass + '">' +
+      '<span class="rating-badge ' + ratingClass + '">' + s.rating + '级</span>' +
+      '<div class="stock-name">' + s.name + '</div>' +
+      '<div class="stock-code">' + s.code + '</div>' +
+      (hasData ? (
+        '<div class="stock-metrics">' +
+          '<div><span class="metric-label">股价</span><div class="metric-value">' + priceStr + '</div></div>' +
+          '<div><span class="metric-label">涨跌幅</span><div class="metric-value ' + chgClass + '">' + chgStr + '</div></div>' +
+          '<div><span class="metric-label">PE</span><div class="metric-value">' + peStr + '</div></div>' +
+          '<div><span class="metric-label">PB</span><div class="metric-value">' + pbStr + '</div></div>' +
+        '</div>'
+      ) : (
+        '<div class="no-data">📡 股价待接入 data_fetcher<br>PE: ' + peStr + '（参考值）</div>'
+      )) +
+    '</div>';
   });
+  grid.innerHTML = html;
 }
 
-// ===== 渲染追踪仪表板 =====
-function renderTracking(data) {
-  const tbody = document.getElementById('trackingBody');
-  tbody.innerHTML = '';
-  TRACKING.forEach(t => {
-    let currentVal = t.currentVal || '—';
-    let status = '—';
-    let statusClass = '';
+// ===== 渲染追踪表 =====
+function renderTracking() {
+  var tbody = document.getElementById('trackingBody');
+  var html = '';
+  TRACKING.forEach(function(t) {
+    var currentVal = t.currentVal || '—';
+    var status = '—', statusClass = '';
 
-    if (t.field && data && data[t.field] !== undefined) {
-      currentVal = data[t.field];
-      if (t.field === 'pe') currentVal = currentVal + 'x';
-      if (t.field === 'pb') currentVal = currentVal + 'x';
+    if (t.field && t.stockCode) {
+      var s = stockData.find(function(x) { return x.code === t.stockCode; });
+      if (s && s[t.field] != null) {
+        currentVal = t.field === 'pe' ? s[t.field].toFixed(1) + 'x'
+                   : t.field === 'pb' ? s[t.field].toFixed(2) + 'x'
+                   : s[t.field].toFixed(2);
+        if (t.field === 'price') {
+          var diff = s.price - parseFloat(t.lastVal);
+          if (!isNaN(diff)) {
+            status = (diff > 0 ? '↑' : diff < 0 ? '↓' : '→') + ' ' + Math.abs(diff).toFixed(2);
+            statusClass = diff > 0 ? 'status-ok' : diff < 0 ? 'status-warn' : '';
+          }
+        }
+      }
     }
 
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${t.label}</td>
-      <td>${t.lastVal}</td>
-      <td>${currentVal}</td>
-      <td>—</td>
-      <td class="${statusClass}">${status || (t.field ? '自动' : '手动')}</td>
-    `;
-    tbody.appendChild(tr);
+    html += '<tr>' +
+      '<td>' + t.label + '</td>' +
+      '<td>' + t.lastVal + '</td>' +
+      '<td>' + currentVal + '</td>' +
+      '<td>—</td>' +
+      '<td class="' + statusClass + '">' + (status !== '—' ? status : (t.field ? '自动' : '手动')) + '</td>' +
+    '</tr>';
   });
+  tbody.innerHTML = html;
 }
 
-// ===== 从 JSON 加载股价数据 =====
+// ===== 加载数据 & 渲染 =====
 function loadStockData() {
   fetch('../../data/stock_prices.json')
-    .then(r => r.json())
-    .then(data => {
-      const stock = data.find(s => s.code === '601985');
-      if (stock) {
-        document.getElementById('dashPrice').textContent = stock.price || '—';
-        document.getElementById('dashPE').textContent = (stock.pe || '—') + 'x';
-        document.getElementById('dashPB').textContent = (stock.pb || '—') + 'x';
-        const chg = stock.changePercent;
-        if (chg !== undefined) {
-          const el = document.getElementById('dashChange');
-          el.textContent = (chg > 0 ? '+' : '') + Number(chg).toFixed(2) + '%';
-          el.className = 'value ' + (chg > 0 ? 'signal-up' : chg < 0 ? 'signal-down' : 'signal-flat');
-        }
-        renderTracking(stock);
-      } else {
-        renderTracking(null);
-      }
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      stockData = data;
+      renderStockCards();
+      renderTracking();
     })
-    .catch(() => renderTracking(null));
+    .catch(function() {
+      renderStockCards();
+      renderTracking();
+    });
+}
+
+function renderAll() {
+  renderStockCards();
+  renderTracking();
+  if (stockData.length === 0) loadStockData();
 }
 
 // ===== 初始化 =====
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
   loadStockData();
 });
 </script>
