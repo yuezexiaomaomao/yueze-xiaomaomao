@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 
+# 生成输出（site_generator.py 产物，不纳入版本控制）
+output/
+
 # WorkBuddy 工作数据
 .workbuddy/
 
